@@ -192,6 +192,17 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .big-calc .calc-out{background:#F7F9FA}
 
 /* reveal */
+/* pipeline */
+.pipe{margin:8px 0 18px}
+.pstep{display:grid;grid-template-columns:auto 1fr;gap:26px;padding:26px 0;border-top:1px solid var(--line)}
+.pstep:last-child{border-bottom:1px solid var(--line)}
+.pstep .pno{font-family:var(--serif);font-weight:900;font-size:clamp(40px,6vw,58px);color:var(--clay);line-height:.9}
+.pstep .ptag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.24em;color:var(--muted)}
+.pstep h4{font-family:var(--serif);font-weight:700;font-size:clamp(19px,2.4vw,24px);color:var(--ink);margin:7px 0 9px}
+.pstep p{font-size:15.5px;color:#39474f;line-height:1.65;max-width:780px}
+.disc{font-size:13.5px;color:var(--muted);line-height:1.7;margin-top:26px;padding-top:20px;border-top:1px dashed var(--line);max-width:880px}
+.foot-pipe{font-size:13px;color:#7d8d98;margin-top:14px;border-top:1px solid #33444f;padding-top:16px}
+
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}
 
@@ -234,6 +245,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <a href="#part4">Ⅳ 拓展</a>
       <a href="#part5">Ⅴ 整合</a>
       <a href="#summary">總結</a>
+      <a href="#pipeline">生成方式</a>
     </nav>
   </div>
   <div id="scrollbar"></div>
@@ -500,9 +512,40 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 <div class="tablewrap reveal"><table><thead><tr><th>模組</th><th>角色</th><th>一句話精髓</th></tr></thead><tbody><tr><td>財務</td><td><span class="badge red">底線</span></td><td>用「完全用人成本」算損益，否則獲利都是假象。</td></tr><tr><td>人事</td><td><span class="badge gold">燃料</span></td><td>人均產值才是 14 人事務所的效率真相。</td></tr><tr><td>專案</td><td><span class="badge green">過程</span></td><td>把時間當燃料，靠燃盡圖與合約守住利潤。</td></tr><tr><td>策略</td><td><span class="badge clayb">方向</span></td><td>不可取代性決定定價權，定價權決定利潤空間。</td></tr></tbody></table></div>
 <div class="callout ink reveal"><span class="co-l">結語</span><span class="co-t">畫一棟漂亮的建築是專業；設計一套能自動運轉、健康獲利的事務所系統，是智慧。事務所本身，就是你這輩子最重要的設計作品。</span></div>
 </div></section>
+<section class="sec" id="pipeline"><div class="wrap">
+<div class="sechead"><p class="kick reveal">關於本複習教材</p><h2 class="sec-title reveal">本簡報與網頁的生成方式</h2><p class="sec-sub reveal">從原始課程，到結構化筆記、複習簡報，最後成為這個互動網頁——一條把「課程內容」逐步轉成「可操作工具」的工作流。</p></div>
+<div class="pipe reveal">
+  <div class="pstep">
+    <span class="pno">1</span>
+    <div class="pbody"><span class="ptag">SOURCE</span><h4>內容來源</h4>
+      <p>莊雅典建築師「事務所經營管理」影片資料庫——下集聚焦 Topic 4–6：專案經營（案件篩選）、策略與業務拓展、整合實踐。</p></div>
+  </div>
+  <div class="pstep">
+    <span class="pno">2</span>
+    <div class="pbody"><span class="ptag">AI TUTOR</span><h4>Heptabase AI Tutor 生成課程</h4>
+      <p>透過 Heptabase 的 AI Tutor，將影片資料庫整理成結構化課程筆記（Lesson 7–11：篩選矩陣、工時與合約、定位定價、客戶與案源、系統整合）。</p></div>
+  </div>
+  <div class="pstep">
+    <span class="pno">3</span>
+    <div class="pbody"><span class="ptag">STRUCTURE</span><h4>課程筆記匯入 Claude，結構化整理</h4>
+      <p>把課程筆記交給 Claude，先抽出貫穿下集的主軸（選對案子、守住利潤、把四件事變成一套系統），再依「決策發生的時間順序」重組成五大 Part，並產出結構化內容與 55 頁逐頁大綱。</p></div>
+  </div>
+  <div class="pstep">
+    <span class="pno">4</span>
+    <div class="pbody"><span class="ptag">DECK · 55 頁</span><h4>生成複習簡報</h4>
+      <p>依大綱產出 55 頁自我複習簡報（16:9）：每頁收斂重點與一條「決策規則」，套用水墨深藍＋陶土的建築編輯調性，含篩選矩陣、燃盡圖、量子跳躍、1,500 萬模擬等視覺。</p></div>
+  </div>
+  <div class="pstep">
+    <span class="pno">5</span>
+    <div class="pbody"><span class="ptag">WEB · 本頁</span><h4>轉為互動式網頁</h4>
+      <p>將簡報內容置入捲動式網頁，並把可計算的環節升級為即時計算機——篩選矩陣評分器、完全人力成本、可用工時、超時預警、報價試算、客戶分級、1,500 萬整合模擬，共 <b>7 個</b>——從「讀懂」進一步變成「邊輸入、邊內化」。</p></div>
+  </div>
+</div>
+<p class="disc reveal">本工具為課程內容的自學整理，所有公式與基準（如完全人力成本 1.6–1.8 倍、政府費率上限 5–10%、現金儲備 6 個月、標案：私案 6–7:3–4 等）皆為教學示例與經驗值，非財務或法律建議；實際決策請以事務所真實帳務與專業意見為準。</p>
+</div></section>
 <footer class="foot"><div class="wrap">
-  <p><b>事務所商業決策能力（下）· 互動複習網頁</b></p>
-  <p>內容主軸：選案 → 執行防禦 → 定位定價 → 業務拓展 → 系統整合。本工具為課程內容的自學整理，所有公式與基準（完全人力成本 1.6–1.8 倍、費率上限、現金儲備 6 個月等）皆為教學示例與經驗值，非財務或法律建議；實際決策請以事務所真實帳務與專業意見為準。</p>
+  <p><b>事務所商業決策能力（下）· 互動複習網頁</b>　專案經營・策略拓展・系統整合</p>
+  <p class="foot-pipe">內容來源：莊雅典建築師影片資料庫　→　Heptabase AI Tutor　→　Claude 結構化整理　→　55 頁複習簡報　→　互動網頁（本頁）</p>
 </div></footer>
 <script>
 const $=id=>document.getElementById(id);
