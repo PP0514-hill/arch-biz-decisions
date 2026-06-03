@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>事務所商業決策能力（下）· 互動複習網頁</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#23303A;--ink2:#2C3B46;--ink3:#34454F;
+  --paper:#FFFFFF;--text:#1C262E;--muted:#6B7884;
+  --clay:#B0573A;--claydk:#8F4730;--claylt:#F3EBE4;--clayb:#D98A66;
+  --card:#F4F6F7;--line:#D9DFE3;
+  --green:#5E7355;--gold:#B98A2E;--red:#A8392B;
+  --serif:"Noto Serif TC",serif;--sans:"Noto Sans TC",sans-serif;
+  --wrap:1080px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--paper);line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+b{color:var(--claydk);font-weight:700}
+em{font-style:normal;color:var(--clay)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:60;background:rgba(35,48,58,.96);backdrop-filter:blur(8px);border-bottom:1px solid #33444f}
+.nav-in{max-width:var(--wrap);margin:0 auto;padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{color:#fff;font-family:var(--serif);font-weight:700;font-size:17px;text-decoration:none;letter-spacing:.04em;white-space:nowrap}
+.brand em{color:var(--clayb)}
+.links{display:flex;gap:4px;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{color:#aebcc6;text-decoration:none;font-size:14px;font-weight:500;padding:7px 12px;border-radius:20px;white-space:nowrap;transition:.2s;letter-spacing:.03em}
+.links a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.links a.active{color:#fff;background:var(--clay)}
+#scrollbar{height:3px;background:var(--clay);width:0%}
+
+/* hero */
+.hero{position:relative;background:var(--ink);color:#fff;overflow:hidden}
+.hero .bar{position:absolute;left:max(28px,calc((100vw - var(--wrap))/2 + 28px));top:0;bottom:0;width:5px;background:var(--clay)}
+.hero-in{padding:clamp(70px,11vw,140px) 28px clamp(64px,9vw,120px);padding-left:46px}
+.hero-kick{font-weight:700;font-size:clamp(12px,1.4vw,15px);letter-spacing:.36em;color:var(--clayb);margin-bottom:26px}
+.hero-title{font-family:var(--serif);font-weight:900;font-size:clamp(34px,6.2vw,72px);line-height:1.18;letter-spacing:.01em}
+.hero-sub{font-size:clamp(15px,1.9vw,20px);color:#B7C5CE;max-width:760px;margin-top:30px;line-height:1.75}
+.hero-sub b{color:var(--clayb)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:14px 32px;margin-top:38px;font-size:13px;color:#7d8d98}
+.hero-meta span{border-top:1px solid #3c4d57;padding-top:12px}
+.hero-cta{display:inline-block;margin-top:40px;color:#fff;text-decoration:none;font-weight:700;font-size:15px;border:1px solid #4a5b66;padding:13px 26px;border-radius:30px;letter-spacing:.08em;transition:.2s}
+.hero-cta:hover{background:var(--clay);border-color:var(--clay)}
+
+/* sections */
+.sec{padding:clamp(56px,8vw,104px) 0}
+.sec:nth-of-type(even){background:#FBFCFC}
+.sechead{margin-bottom:34px}
+.kick{font-weight:700;font-size:13px;letter-spacing:.32em;color:var(--clay);margin-bottom:14px}
+.sec-title{font-family:var(--serif);font-weight:900;font-size:clamp(26px,4vw,42px);line-height:1.25;color:var(--text);letter-spacing:.01em}
+.sec-sub{font-size:clamp(15px,1.8vw,18px);color:var(--muted);margin-top:14px}
+.mini{font-family:var(--serif);font-weight:700;font-size:clamp(18px,2.4vw,23px);color:var(--ink);margin:42px 0 18px}
+.lead{font-size:clamp(16px,2vw,20px);line-height:1.78;color:#2b3942;margin-bottom:26px;max-width:880px}
+.para{font-size:clamp(15px,1.7vw,17px);line-height:1.8;color:#33424b;margin:26px 0;max-width:880px}
+
+/* band / divider */
+.band{position:relative;background:var(--ink);color:#fff;overflow:hidden;padding:clamp(58px,8vw,96px) 0}
+.band .roman{position:absolute;right:2%;top:50%;transform:translateY(-50%);font-family:var(--serif);font-weight:900;font-size:clamp(180px,34vw,420px);line-height:1;color:rgba(255,255,255,.05);user-select:none;pointer-events:none}
+.band-in{position:relative}
+.bnum{font-weight:700;font-size:13px;letter-spacing:.42em;color:var(--clayb);margin-bottom:18px}
+.btitle{font-family:var(--serif);font-weight:900;font-size:clamp(40px,7vw,76px);line-height:1.08;letter-spacing:.03em}
+.bsub{font-weight:700;font-size:clamp(13px,1.6vw,17px);letter-spacing:.3em;color:var(--clayb);margin-top:18px}
+.bdesc{font-size:clamp(15px,1.8vw,18px);color:#AEBDC8;max-width:680px;margin-top:22px;line-height:1.7}
+
+/* cards */
+.cards{display:grid;gap:18px;margin:8px 0 14px}
+.cards.g3{grid-template-columns:repeat(3,1fr)}
+.cards.g4{grid-template-columns:repeat(4,1fr)}
+.cards.g5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--clay);border-radius:8px;padding:24px 22px}
+.card .cn{font-family:var(--serif);font-weight:900;font-size:30px;color:var(--clay);line-height:1;display:block;margin-bottom:12px}
+.card h5{font-family:var(--serif);font-weight:700;font-size:clamp(17px,2vw,21px);color:var(--ink);margin-bottom:10px}
+.card p{font-size:15px;line-height:1.6;color:#39474f}
+
+/* cols */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0}
+.col{padding:28px 26px;border-radius:10px}
+.col.neutral{background:var(--card);border:1px solid var(--line)}
+.col.clay{background:var(--claylt);border:1px solid #E7D8CC}
+.col .coltag{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.18em;color:var(--muted);margin-bottom:10px}
+.col.clay .coltag{color:var(--claydk)}
+.col h4{font-family:var(--serif);font-weight:700;font-size:clamp(19px,2.3vw,24px);margin-bottom:16px;color:var(--ink)}
+.col ul{list-style:none}
+.col li{position:relative;padding-left:22px;margin-bottom:11px;font-size:15.5px;line-height:1.55}
+.col li:before{content:"";position:absolute;left:0;top:.6em;width:8px;height:8px;border-radius:50%;background:var(--clay)}
+
+/* rule */
+.rule{background:var(--claylt);border-left:6px solid var(--clay);border-radius:0 8px 8px 0;padding:22px 26px;margin:28px 0}
+.rule .rl{font-weight:700;font-size:13px;letter-spacing:.28em;color:var(--claydk);display:block;margin-bottom:9px}
+.rule .rt{font-weight:500;font-size:clamp(16px,1.9vw,19px);color:var(--text);line-height:1.55}
+
+/* table */
+.tablewrap{overflow-x:auto;margin:24px 0}
+table{width:100%;border-collapse:collapse;font-size:15.5px;min-width:520px}
+thead th{background:var(--ink);color:#fff;font-weight:700;padding:15px 18px;text-align:left;letter-spacing:.03em}
+tbody td{background:#fff;border:1px solid var(--line);padding:14px 18px;color:var(--text);line-height:1.5}
+tbody td:first-child{font-weight:500;color:var(--ink);white-space:nowrap}
+tbody tr:nth-child(even) td{background:#FAFBFC}
+.badge{display:inline-block;padding:4px 13px;border-radius:20px;font-size:13px;font-weight:700;color:#fff}
+.badge.green{background:var(--green)}.badge.gold{background:var(--gold)}.badge.red{background:var(--red)}.badge.clayb{background:var(--clay)}
+
+/* callout */
+.callout{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;border-radius:9px;padding:22px 26px;margin:26px 0;line-height:1.6}
+.callout.clay{background:var(--claylt);border-left:6px solid var(--clay)}
+.callout.ink{background:var(--ink)}
+.callout .co-l{font-family:var(--serif);font-weight:700;font-size:19px;white-space:nowrap}
+.callout.clay .co-l{color:var(--claydk)}.callout.ink .co-l{color:var(--clayb)}
+.callout .co-t{font-size:clamp(15px,1.8vw,18px)}
+.callout.clay .co-t{color:var(--text)}.callout.ink .co-t{color:#E4EAEE}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:18px 0}
+.stat{background:var(--ink);border-left:6px solid var(--clay);border-radius:0 8px 8px 0;padding:24px 20px}
+.stat .num{font-family:var(--serif);font-weight:900;font-size:clamp(30px,4.4vw,46px);line-height:1;color:#fff}
+.stat .num .u{font-size:.42em;color:var(--clayb);margin-left:.1em;font-weight:700}
+.stat .lbl{font-size:13.5px;color:#9FB0BC;margin-top:12px;line-height:1.4}
+
+/* propbar */
+.propbar{display:flex;height:50px;border-radius:8px;overflow:hidden;margin:26px 0}
+.seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;letter-spacing:.03em}
+.seg.c-ink{background:var(--ink)}.seg.c-clay{background:var(--clay)}
+.seg span{padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* chain + summary */
+.summary{background:#FBFCFC}
+.chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:12px;margin:18px 0 30px}
+.ck{flex:1;min-width:150px;background:var(--ink);color:#fff;border-radius:9px;border-bottom:5px solid var(--clay);padding:26px 18px;text-align:center}
+.ck b{font-family:var(--serif);font-weight:900;font-size:24px;display:block;margin-bottom:9px}
+.ck span{font-size:14px;color:#c8d3da}
+.ca{align-self:center;font-size:26px;color:var(--clay);font-weight:700}
+
+/* ===== CALCULATORS ===== */
+.calc{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 40px -28px rgba(35,48,58,.5);overflow:hidden;margin:30px 0}
+.calc-top{background:linear-gradient(180deg,#fbf6f2,#fff);border-bottom:1px solid var(--line);padding:24px 28px}
+.calc-tag{display:inline-block;font-weight:700;font-size:12px;letter-spacing:.2em;color:#fff;background:var(--clay);padding:4px 12px;border-radius:20px;margin-bottom:12px}
+.calc-top h4{font-family:var(--serif);font-weight:700;font-size:clamp(20px,2.5vw,26px);color:var(--ink)}
+.calc-top p{font-size:14.5px;color:var(--muted);margin-top:7px}
+.calc-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.calc-ctrl{padding:28px;border-right:1px solid var(--line);background:#fff}
+.calc-out{padding:28px;background:#FAFBFC;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.frow{margin-bottom:18px}
+.frow label{display:flex;justify-content:space-between;font-size:14.5px;font-weight:500;color:var(--ink);margin-bottom:9px}
+.frow output{font-family:var(--serif);font-weight:700;color:var(--clay);font-size:17px}
+.nfield,.sfield,.wfield{margin-bottom:16px}
+.nfield label,.sfield label,.wfield label{display:block;font-size:14px;font-weight:500;color:var(--ink);margin-bottom:7px}
+.calc input[type=number],.calc select{width:100%;font-family:var(--sans);font-size:16px;padding:11px 13px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--text)}
+.calc input[type=number]:focus,.calc select:focus{outline:none;border-color:var(--clay);box-shadow:0 0 0 3px rgba(176,87,58,.12)}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.wgrid .wfield{margin-bottom:0}
+.hint-s{font-size:13px;color:var(--muted);margin-top:-6px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:5px;background:#E3E8EB;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.25)}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--clay);cursor:pointer;border:3px solid #fff}
+.out{background:var(--ink);border-left:6px solid var(--clay);border-radius:0 8px 8px 0;padding:18px 20px}
+.out.big{padding:24px 22px}
+.out .out-num{font-family:var(--serif);font-weight:900;color:#fff;line-height:1.05;font-size:clamp(26px,4vw,40px)}
+.out.big .out-num{font-size:clamp(32px,5vw,50px)}
+.out.big2{flex:1.4}
+.out.big2 .out-num{font-size:clamp(28px,4.4vw,44px)}
+.out .out-lbl{font-size:13px;color:#9FB0BC;margin-top:8px;line-height:1.4}
+.out.sm{flex:1}
+.out.sm .out-num{font-size:clamp(20px,3vw,28px)}
+.out.danger{border-left-color:var(--red)}
+.out.danger .out-num{color:#F2B5AD}
+.out-row{display:flex;gap:12px}
+.verdict{font-family:var(--serif);font-weight:700;font-size:clamp(17px,2.2vw,22px);text-align:center;padding:14px;border-radius:8px;background:var(--claylt);color:var(--claydk)}
+.verdict.good{background:#E9EFE6;color:#3f5237}
+.verdict.warn{background:#FBF1DE;color:#7a5a14}
+.verdict.bad{background:#FBE7E3;color:var(--red)}
+.flags{display:flex;flex-direction:column;gap:8px}
+.flag{font-size:14px;padding:10px 14px;border-radius:7px;background:#FBE7E3;color:var(--red);border-left:4px solid var(--red);font-weight:500}
+.flag.ok{background:#E9EFE6;color:#3f5237;border-left-color:var(--green)}
+.light{display:flex;align-items:center;gap:12px;padding:16px 18px;border-radius:9px;font-family:var(--serif);font-weight:700;font-size:20px}
+.light .dot{width:18px;height:18px;border-radius:50%;background:#ccc;box-shadow:0 0 0 5px rgba(0,0,0,.05)}
+.light.green{background:#E9EFE6;color:#3f5237}.light.green .dot{background:var(--green)}
+.light.gold{background:#FBF1DE;color:#7a5a14}.light.gold .dot{background:var(--gold)}
+.light.red{background:#FBE7E3;color:var(--red)}.light.red .dot{background:var(--red)}
+.action{font-size:14.5px;color:#39474f;line-height:1.6;background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.stage-bar{display:flex;flex-direction:column;gap:9px}
+.sbar{display:flex;align-items:center;gap:10px}
+.sbar .sname{font-size:13px;color:var(--muted);width:74px;flex:none}
+.sbar .strack{flex:1;height:22px;background:#E8ECEE;border-radius:5px;overflow:hidden}
+.sbar .sfill{height:100%;background:var(--clay);display:flex;align-items:center;justify-content:flex-end;padding-right:8px;color:#fff;font-size:12px;font-weight:700;min-width:30px}
+.sbar .sfill.i{background:var(--ink2)}
+.big-calc .calc-out{background:#F7F9FA}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* footer */
+.foot{background:var(--ink);color:#9aa9b3;padding:48px 0;font-size:13.5px;line-height:1.7}
+.foot b{color:#fff}
+.foot p{max-width:880px;margin-bottom:10px}
+
+/* responsive */
+@media(max-width:880px){
+  .cards.g4,.cards.g5{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .hero .bar{left:0;width:4px}
+  .hero-in{padding-left:28px}
+  .cols{grid-template-columns:1fr}
+  .calc-body{grid-template-columns:1fr}
+  .calc-ctrl{border-right:none;border-bottom:1px solid var(--line)}
+  .chain .ca{transform:rotate(90deg)}
+  .ck{min-width:100%}
+}
+@media(max-width:520px){
+  .cards.g3,.cards.g4,.cards.g5{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .out-row{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">事務所商業決策 · <em>下</em></a>
+    <nav class="links">
+      <a href="#intro">開場</a>
+      <a href="#part1">Ⅰ 接案</a>
+      <a href="#part2">Ⅱ 利潤</a>
+      <a href="#part3">Ⅲ 定價</a>
+      <a href="#part4">Ⅳ 拓展</a>
+      <a href="#part5">Ⅴ 整合</a>
+      <a href="#summary">總結</a>
+    </nav>
+  </div>
+  <div id="scrollbar"></div>
+</header>
+<section class="hero" id="top">
+  <div class="bar"></div>
+  <div class="wrap hero-in">
+    <p class="hero-kick">ARCH · BUSINESS DECISIONS · PART Ⅱ · 互動版</p>
+    <h1 class="hero-title">選對案子、守住利潤、<br>把四件事變成<em>一套系統</em>。</h1>
+    <p class="hero-sub">建築師事務所商業決策能力（下）—— 把每一條決策規則，套進你自己的真實數字裡。專案經營 · 策略拓展 · 系統整合，外加 <b>7 個即時計算機</b>。</p>
+    <div class="hero-meta">
+      <span>內容主軸：選案 → 執行防禦 → 定位定價 → 業務拓展 → 系統整合</span>
+      <span>所有公式皆為教學示例與經驗值，非財務／法律建議</span>
+    </div>
+    <a class="hero-cta" href="#intro">往下開始 ↓</a>
+  </div>
+</section>
+<section class="sec" id="intro"><div class="wrap">
+<div class="sechead"><p class="kick reveal">開場 · 為什麼是現在</p><h2 class="sec-title reveal">14 人，是「轉型之痛」的臨界點</h2><p class="sec-sub reveal">最稀缺的資源不是錢，是「關鍵人才的產能」。</p></div>
+<p class="lead reveal">上集談「換腦袋、看懂錢、帶好人」；下集要把財務、人事、專案、策略<b>整合成一套能預測、能預警、能自我修正的決策系統</b>。負責人的角色，從「救火隊長」轉為「系統設計師」。</p>
+<div class="cards g4"><div class="card reveal"><span class="cn">財務</span><h5>看懂錢</h5><p>邊際貢獻、現金流、單案損益——經營的計分板。</p></div><div class="card reveal"><span class="cn">人事</span><h5>用對人</h5><p>完全用人成本 1.6–1.8 倍，人均產值是效率真相。</p></div><div class="card reveal"><span class="cn">專案</span><h5>做成利潤</h5><p>工時即燃料，靠燃盡圖與合約守住每一分毛利。</p></div><div class="card reveal"><span class="cn">策略</span><h5>選對方向</h5><p>不可取代性決定定價權，定價權決定利潤空間。</p></div></div>
+<h3 class="mini reveal">貫穿全課的對照基準</h3>
+<div class="stats reveal">
+  <div class="stat"><div class="num">1.6–1.8<span class="u">×</span></div><div class="lbl">完全用人成本（月薪倍率）</div></div>
+  <div class="stat"><div class="num">12<span class="u">%</span></div><div class="lbl">競圖／提案成功率</div></div>
+  <div class="stat"><div class="num">5–10<span class="u">%</span></div><div class="lbl">政府標案費率上限</div></div>
+  <div class="stat"><div class="num">6<span class="u">個月</span></div><div class="lbl">建議現金儲備水位</div></div>
+</div>
+<div class="rule reveal"><span class="rl">對照基準</span><p class="rt">在 12% 的競爭現實中，要把 100% 的子彈，射向那 12% 最值得爭取的目標。</p></div>
+</div></section>
+<div class="band">
+      <div class="roman">Ⅰ</div>
+      <div class="wrap band-in">
+        <div class="bnum">PART Ⅰ</div>
+        <h2 class="btitle">接什麼案？</h2>
+        <div class="bsub">CASE SCREENING & SOURCE LOGIC</div>
+        <p class="bdesc">「不接什麼」比「接什麼」更決定長期發展。用篩選矩陣，把接案決策從「憑感覺」轉成「數據化評估」。</p>
+      </div>
+    </div>
+<section class="sec" id="part1"><div class="wrap">
+<div class="sechead"><p class="kick reveal">第一節 · 機會成本與篩選矩陣</p><h2 class="sec-title reveal">一個 Yes，背後是三個 No</h2></div>
+<div class="cols reveal"><div class="col neutral"><span class="coltag">機會成本</span><h4>說 Yes 給平庸案，等於說 No 給——</h4><ul><li><b>團隊成長</b>：制式修改稀釋專業熱情</li><li><b>利潤穩定</b>：低貢獻吃掉優質案利潤</li><li><b>未來偉大案件</b>：產能被瑣事塞滿</li></ul></div><div class="col clay"><span class="coltag">評估維度</span><h4>四大評估維度（各 1–5 分）</h4><ul><li><b>規模潛力</b>：產能填補效率，非總造價</li><li><b>利潤空間</b>：扣外包後夠付 1.6–1.8 倍成本嗎</li><li><b>策略價值</b>：新領域／得獎／大業主試金石</li><li><b>執行風險</b>：業主反覆、收款、法規——最易忽略</li></ul></div></div>
+<p class="para reveal">四維度的權重不是固定的——要依事務所<b>當下狀態</b>調整。剛結案、現金吃緊時，把「利潤」「規模」加重、「策略」調低。下面這個評分器，讓你把任何一個案子丟進去打分。</p>
+<div class="calc reveal" id="calc1">
+  <div class="calc-top"><span class="calc-tag">互動計算機 01</span><h4>案件篩選矩陣評分器</h4><p>拉動四個維度分數與權重，即時算出加權總分並檢查決策紅線。</p></div>
+  <div class="calc-body">
+    <div class="calc-ctrl">
+      <div class="frow"><label>規模潛力 <output id="m_s_o">3</output></label><input type="range" id="m_s" min="1" max="5" step="1" value="3"></div>
+      <div class="frow"><label>利潤空間 <output id="m_p_o">3</output></label><input type="range" id="m_p" min="1" max="5" step="1" value="3"></div>
+      <div class="frow"><label>策略價值 <output id="m_v_o">2</output></label><input type="range" id="m_v" min="1" max="5" step="1" value="2"></div>
+      <div class="frow"><label>執行風險 <output id="m_r_o">3</output></label><input type="range" id="m_r" min="1" max="5" step="1" value="3"></div>
+      <div class="wgrid">
+        <div class="wfield"><label>權重 規模%</label><input type="number" id="w_s" value="30"></div>
+        <div class="wfield"><label>權重 利潤%</label><input type="number" id="w_p" value="40"></div>
+        <div class="wfield"><label>權重 策略%</label><input type="number" id="w_v" value="10"></div>
+        <div class="wfield"><label>權重 風險%</label><input type="number" id="w_r" value="20"></div>
+      </div>
+    </div>
+    <div class="calc-out">
+      <div class="out big" id="m_verdict_box"><div class="out-num" id="m_score">--</div><div class="out-lbl">加權總分（滿分 5.0）</div></div>
+      <div class="verdict" id="m_verdict">評估中</div>
+      <div class="flags" id="m_flags"></div>
+    </div>
+  </div>
+</div>
+<div class="rule reveal"><span class="rl">決策規則</span><p class="rt">除了加權總分，還要設「一票否決」紅線：執行風險 &lt; 2、利潤空間 &lt; 2、或策略×規模雙低——任一觸發就婉拒，別讓單一災難拖垮事務所。</p></div>
+<div class="sechead"><p class="kick reveal">第二節 · 標案 vs. 私案</p><h2 class="sec-title reveal">兩套生存規則，與真實毛利率殺手</h2></div>
+<div class="tablewrap reveal"><table><thead><tr><th>比較維度</th><th>政府標案</th><th>私人委託</th></tr></thead><tbody><tr><td>核心邏輯</td><td>程序正義</td><td>人脈與品牌</td></tr><tr><td>定價權</td><td>費率鎖死，毛利有天花板</td><td>可價值定價（Value-based）</td></tr><tr><td>收款風險</td><td>拿得到，但流程僵化</td><td>節點好商量，但怕倒帳</td></tr><tr><td>隱形成本</td><td>行政負擔：跨部會審查、公文往返</td><td>業主管理：情緒勞動、隨時修改</td></tr></tbody></table></div>
+<div class="callout clay reveal"><span class="co-l">金句</span><span class="co-t">在私案，1 小時的繪圖工時背後，可能藏著 3 小時的安撫與說明工時——這就是真實毛利率殺手。</span></div>
+<div class="propbar reveal">
+  <div class="seg c-ink" style="width:65%"><span>標案 60–70%　生存基石</span></div>
+  <div class="seg c-clay" style="width:35%"><span>私案 30–40%　利潤加速器</span></div>
+</div>
+<div class="rule reveal"><span class="rl">決策規則</span><p class="rt">用私案的利潤去「供養」具理想色彩、利潤微薄的公共標案；比例極端化（如 90% 標案）會讓現金失彈性、行政過載、人才流失。</p></div>
+</div></section>
+<div class="band">
+      <div class="roman">Ⅱ</div>
+      <div class="wrap band-in">
+        <div class="bnum">PART Ⅱ</div>
+        <h2 class="btitle">做成利潤</h2>
+        <div class="bsub">EXECUTION & DEFENSE</div>
+        <p class="bdesc">選到好案不代表利潤落袋。把「時間」視為限額燃料，用工時預算、超時預警與合約，守住每一分毛利。</p>
+      </div>
+    </div>
+<section class="sec" id="part2"><div class="wrap">
+<div class="sechead"><p class="kick reveal">第一節 · 完全人力成本</p><h2 class="sec-title reveal">報多少、能花多少，都從這個倍率開始</h2></div>
+<p class="lead reveal">報價與工時預算的地基，是「完全人力成本」= 月薪 × <b>1.6–1.8 倍</b>（含勞健保、獎金攤提、行政與空間分攤）。月薪 5 萬的設計師，每月實際耗掉公司 8–9 萬。先把它算清楚，後面兩個計算機才有意義。</p>
+<div class="calc reveal" id="calc2">
+  <div class="calc-top"><span class="calc-tag">互動計算機 02</span><h4>完全人力成本計算機</h4><p>算出員工的真實月成本與「完全時薪」，下方工時計算機會用到。</p></div>
+  <div class="calc-body">
+    <div class="calc-ctrl">
+      <div class="nfield"><label>員工月薪（元）</label><input type="number" id="c_salary" value="50000"></div>
+      <div class="frow"><label>完全成本倍率 <output id="c_mult_o">1.80</output>×</label><input type="range" id="c_mult" min="1.5" max="2" step="0.05" value="1.8"></div>
+      <p class="hint-s">1.6 ＝ 精簡團隊｜1.8 ＝ 行政與軟硬體健全</p>
+    </div>
+    <div class="calc-out">
+      <div class="out big"><div class="out-num" id="c_full">--</div><div class="out-lbl">完全月成本（元）</div></div>
+      <div class="out-row">
+        <div class="out sm"><div class="out-num" id="c_hidden">--</div><div class="out-lbl">薪資外隱形負擔</div></div>
+        <div class="out sm"><div class="out-num" id="c_rate">--</div><div class="out-lbl">完全時薪（元/時）</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="rule reveal"><span class="rl">決策規則</span><p class="rt">員工要求加薪 5,000，對事務所是 ×1.8 ≈ 9,000 的負擔——把談判從情感拉回「如何創造超過 9,000 的新價值」。</p></div>
+<div class="sechead"><p class="kick reveal">第二節 · 工時即燃料</p><h2 class="sec-title reveal">先算油量，再決定怎麼開</h2></div>
+<p class="para reveal">動筆畫第一張草圖前，先用財務底線回推「燃料總量」，再依 <b>20 / 25 / 35 / 20</b> 分配給概念、基本、細部、監造四階段。最常見的悲劇：概念階段燒掉 40–50% 工時，細部時油箱見底。</p>
+<div class="calc reveal" id="calc3">
+  <div class="calc-top"><span class="calc-tag">互動計算機 03</span><h4>可用工時預算計算機</h4><p>輸入設計費與利潤目標，算出燃料總量並自動分配到四個設計階段。</p></div>
+  <div class="calc-body">
+    <div class="calc-ctrl">
+      <div class="nfield"><label>設計費總額（萬）</label><input type="number" id="h_fee" value="500"></div>
+      <div class="nfield"><label>外包／變動成本（萬）</label><input type="number" id="h_var" value="60"></div>
+      <div class="frow"><label>利潤目標 <output id="h_profit_o">25</output>%</label><input type="range" id="h_profit" min="0" max="40" step="5" value="25"></div>
+      <div class="nfield"><label>完全時薪（元/時）</label><input type="number" id="h_rate" value="1500"></div>
+    </div>
+    <div class="calc-out">
+      <div class="out big"><div class="out-num" id="h_total">--</div><div class="out-lbl">可用總工時（燃料總量）</div></div>
+      <div class="stage-bar" id="h_stage"></div>
+    </div>
+  </div>
+</div>
+<div class="rule reveal"><span class="rl">決策規則</span><p class="rt">算出「概念階段 ≈ ○○ 小時」後，你就不能再隨口說「大家再多試幾種立面」——每多試一週，都在削減利潤。</p></div>
+<div class="sechead"><p class="kick reveal">第三節 · 超時預警</p><h2 class="sec-title reveal">燃盡圖上的兩道紅線：70% 與 90%</h2></div>
+<div class="cols reveal"><div class="col neutral"><span class="coltag">黃燈</span><h4>第一道紅線 · 70%</h4><ul><li>階段工時燒掉 7 成、進度卻未到位</li><li>提交「原因分析報告」</li><li>抽調資深人員、收斂方案、停止發散</li></ul></div><div class="col clay"><span class="coltag">紅燈</span><h4>第二道紅線 · 90%</h4><ul><li>存亡關頭，負責人親自介入</li><li>是業主「範疇蔓延」？→ 對外談判追加</li><li>是內部效率？→ 對內止損</li></ul></div></div>
+<div class="calc reveal" id="calc4">
+  <div class="calc-top"><span class="calc-tag">互動計算機 04</span><h4>超時預警紅黃燈</h4><p>輸入某階段的預算工時、已消耗工時與目前進度，判斷該亮什麼燈。</p></div>
+  <div class="calc-body">
+    <div class="calc-ctrl">
+      <div class="nfield"><label>本階段預算工時</label><input type="number" id="a_budget" value="420"></div>
+      <div class="nfield"><label>已消耗工時</label><input type="number" id="a_used" value="350"></div>
+      <div class="frow"><label>目前實際進度 <output id="a_prog_o">50</output>%</label><input type="range" id="a_prog" min="0" max="100" step="5" value="50"></div>
+    </div>
+    <div class="calc-out">
+      <div class="light" id="a_light"><span class="dot"></span><span id="a_light_t">--</span></div>
+      <div class="out sm"><div class="out-num" id="a_pct">--</div><div class="out-lbl">工時消耗率</div></div>
+      <p class="action" id="a_action">輸入數字後給出建議動作。</p>
+    </div>
+  </div>
+</div>
+<div class="sechead"><p class="kick reveal">第四節 · 合約五大保護條款</p><h2 class="sec-title reveal">從「首席設計師」到「風險管理者」</h2></div>
+<div class="cards g5"><div class="card reveal"><span class="cn">①</span><h5>範疇界定</h5><p>正面表列交付物＋負面表列排除事項，雙重保險。</p></div><div class="card reveal"><span class="cn">②</span><h5>追加費用</h5><p>量化重大變更（樓地板 &gt;10%）、設修改次數上限。</p></div><div class="card reveal"><span class="cn">③</span><h5>智財歸屬</h5><p>區分使用權與版權，防「拿圖走人」。</p></div><div class="card reveal"><span class="cn">④</span><h5>賠償限制</h5><p>賠償上限與「實領設計費」掛鉤——保命符。</p></div><div class="card reveal"><span class="cn">⑤</span><h5>終止退場</h5><p>按「已完成工時百分比」請款，而非行政進度。</p></div></div>
+<div class="rule reveal"><span class="rl">決策規則</span><p class="rt">議價決定營收天花板，<b>議約決定獲利地平線</b>。清晰條款不是愛計較，而是對合作關係的尊重——模糊合約才是糾紛溫床。</p></div>
+</div></section>
+<div class="band">
+      <div class="roman">Ⅲ</div>
+      <div class="wrap band-in">
+        <div class="bnum">PART Ⅲ</div>
+        <h2 class="btitle">收高價</h2>
+        <div class="bsub">POSITIONING · PRICING · PITCH</div>
+        <p class="bdesc">定位決定你的價值，價值決定你的價格。找到那份讓客戶「非你不可」的不可取代性，並用報價守住它。</p>
+      </div>
+    </div>
+<section class="sec" id="part3"><div class="wrap">
+<div class="sechead"><p class="kick reveal">第一節 · 不可取代性與價格訊號</p><h2 class="sec-title reveal">價格，是業主對你專業度的第一個推論</h2></div>
+<div class="cols reveal"><div class="col neutral"><span class="coltag">定位</span><h4>不可取代性 = 三要素交集</h4><ul><li><b>目標客戶</b> × <b>核心強項</b> × <b>差異化服務</b></li><li>Q-LAB：技術護城河</li><li>十彥：建築文案與論述能力</li></ul></div><div class="col clay"><span class="coltag">代價</span><h4>低價競標的三大長期代價</h4><ul><li>品牌形象稀釋，翻轉難如重新創業</li><li>員工過載 → 品質下降 → 惡性循環</li><li>沒利潤＝沒錢做研發，失去不可取代性</li></ul></div></div>
+<p class="para reveal">品質難在購買前驗證時，業主會把「價格」當成專業度的代標。所以報價不只是算成本，更是<b>價值訊號</b>。下面的試算器同時做兩件事：用成本加成算出「理想報價」，再用法定費率上限檢查你會不會「倒貼」。</p>
+<div class="calc reveal" id="calc5">
+  <div class="calc-top"><span class="calc-tag">互動計算機 05</span><h4>成本加成報價試算器</h4><p>算出理想報價，並對照政府費率上限，揪出「越接越賠」的案子。</p></div>
+  <div class="calc-body">
+    <div class="calc-ctrl">
+      <div class="nfield"><label>預估投入工時</label><input type="number" id="q_hours" value="8694"></div>
+      <div class="nfield"><label>完全時薪（元/時）</label><input type="number" id="q_rate" value="500"></div>
+      <div class="nfield"><label>變動成本（萬）</label><input type="number" id="q_var" value="30"></div>
+      <div class="frow"><label>利潤目標 <output id="q_profit_o">15</output>%</label><input type="range" id="q_profit" min="0" max="40" step="5" value="15"></div>
+      <div class="frow"><label>風險緩衝 <output id="q_buffer_o">8</output>%</label><input type="range" id="q_buffer" min="0" max="20" step="1" value="8"></div>
+      <div class="wgrid">
+        <div class="wfield"><label>工程造價（萬）</label><input type="number" id="q_cost" value="5000"></div>
+        <div class="wfield"><label>法定費率上限%</label><input type="number" id="q_cap" value="9"></div>
+      </div>
+    </div>
+    <div class="calc-out">
+      <div class="out big"><div class="out-num" id="q_price">--</div><div class="out-lbl">理想報價（萬）</div></div>
+      <div class="out-row">
+        <div class="out sm"><div class="out-num" id="q_costsum">--</div><div class="out-lbl">成本合計（萬）</div></div>
+        <div class="out sm"><div class="out-num" id="q_capval">--</div><div class="out-lbl">費率上限金額（萬）</div></div>
+      </div>
+      <div class="verdict" id="q_gap">--</div>
+    </div>
+  </div>
+</div>
+<div class="rule reveal"><span class="rl">決策規則</span><p class="rt">法定上限低於成本時只有三條路：提升效率（BIM／SOP）、縮減服務範疇、或把虧損當「有意識的行銷投資」——但要睜著眼睛賠。</p></div>
+</div></section>
+<div class="band">
+      <div class="roman">Ⅳ</div>
+      <div class="wrap band-in">
+        <div class="bnum">PART Ⅳ</div>
+        <h2 class="btitle">找上門</h2>
+        <div class="bsub">CLIENT & BUSINESS DEVELOPMENT</div>
+        <p class="bdesc">完工不是結束，是客戶終身價值（LTV）的起點。讓對的業主主動帶著適合你的案子找上門。</p>
+      </div>
+    </div>
+<section class="sec" id="part4"><div class="wrap">
+<div class="sechead"><p class="kick reveal">第一節 · 客戶關係長期經營</p><h2 class="sec-title reveal">把 80% 精力，放在 20% 高價值客戶身上</h2></div>
+<div class="cards g3"><div class="card reveal"><h5>週年健檢</h5><p>主動提供維護建議清單，幫業主資產保值。</p></div><div class="card reveal"><h5>榮譽共享</h5><p>得獎、報導、完工攝影第一時間分享。</p></div><div class="card reveal"><h5>洞察推播</h5><p>容積獎勵、危老資訊 → 從畫圖的變資產顧問。</p></div></div>
+<p class="para reveal">不是每個客戶都值得同樣的投入。把客戶分成 <b>A 戰略夥伴 / B 一般客戶 / C 單次合作</b>，分級投入維繫資源。下面這個建議器會依你的判斷，給出分級與對應策略。</p>
+<div class="calc reveal" id="calc6">
+  <div class="calc-top"><span class="calc-tag">互動計算機 06</span><h4>客戶分級建議器</h4><p>從四個面向描述一位客戶，得出 A／B／C 分級與維繫策略。</p></div>
+  <div class="calc-body">
+    <div class="calc-ctrl">
+      <div class="sfield"><label>未來持續需求</label><select id="cl_recur"><option value="2">高（會持續發案）</option><option value="1">中</option><option value="0">低（單次）</option></select></div>
+      <div class="sfield"><label>信任與授權度</label><select id="cl_trust"><option value="2">高</option><option value="1">中</option><option value="0">低</option></select></div>
+      <div class="sfield"><label>利潤貢獻</label><select id="cl_profit"><option value="2">高</option><option value="1">中</option><option value="0">低</option></select></div>
+      <div class="sfield"><label>轉介紹潛力</label><select id="cl_refer"><option value="2">高</option><option value="1">中</option><option value="0">低</option></select></div>
+    </div>
+    <div class="calc-out">
+      <div class="out big" id="cl_tier_box"><div class="out-num" id="cl_tier">--</div><div class="out-lbl">建議分級</div></div>
+      <p class="action" id="cl_strategy">選擇後給出維繫策略。</p>
+    </div>
+  </div>
+</div>
+<div class="rule reveal"><span class="rl">決策規則</span><p class="rt">轉介紹是成交率最高、開發成本最低的管道——讓 A、B 級客戶擁有「可以吹噓的素材」，並在關係良好時大方主動詢問。</p></div>
+</div></section>
+<div class="band">
+      <div class="roman">Ⅴ</div>
+      <div class="wrap band-in">
+        <div class="bnum">PART Ⅴ</div>
+        <h2 class="btitle">系統整合</h2>
+        <div class="bsub">INTEGRATION & PRACTICE</div>
+        <p class="bdesc">四大模組不是獨立檔案夾，而是一套導航系統。用一個 1,500 萬模擬案，把選案、報價、人力、合約一次跑完。</p>
+      </div>
+    </div>
+<section class="sec" id="part5"><div class="wrap">
+<div class="sechead"><p class="kick reveal">第一節 · 漣漪效應與 A3 決策地圖</p><h2 class="sec-title reveal">移動一個棋子，預見四個維度的漣漪</h2></div>
+<p class="para reveal">14 人組織有「<b>遲滯效應</b>」：一個錯誤報價，影響可能 6 個月後才在現金流爆發。「業主不加費卻要加倍範疇」會同時損壞策略、財務、人事、專案四個系統——所以要拿數據談判，而非情緒。</p>
+<div class="cards g4"><div class="card reveal"><span class="cn">方向盤</span><h5>策略</h5><p>議價成功率、品牌溢價倍數。</p></div><div class="card reveal"><span class="cn">油表</span><h5>財務</h5><p>邊際貢獻、安全邊際、單案毛利率。</p></div><div class="card reveal"><span class="cn">引擎</span><h5>人事</h5><p>工時利用率、留任率、用人成本比重。</p></div><div class="card reveal"><span class="cn">齒輪</span><h5>專案</h5><p>圖說準確率、工時消耗率、收款達成率。</p></div></div>
+<div class="sechead"><p class="kick reveal">第二節 · 1,500 萬標案整合模擬</p><h2 class="sec-title reveal">一個案子，把整套系統跑一遍</h2></div>
+<p class="para reveal">最稀缺的不是 1,500 萬營收，是「關鍵人才的產能」。下面的整合模擬器，從報價回推「成本底線工時」，自動算出階段配置、需要幾位全職人力、以及超時的真實損失。</p>
+<div class="calc big-calc reveal" id="calc7">
+  <div class="calc-top"><span class="calc-tag">互動計算機 07 · 整合模擬</span><h4>1,500 萬標案整合決策模擬器</h4><p>調整標案參數，一次看到燃料總量、階段配置、人力需求與翻案損失。</p></div>
+  <div class="calc-body">
+    <div class="calc-ctrl">
+      <div class="nfield"><label>標案總額（萬）</label><input type="number" id="s_total" value="1500"></div>
+      <div class="frow"><label>利潤目標 <output id="s_profit_o">20</output>%</label><input type="range" id="s_profit" min="0" max="40" step="5" value="20"></div>
+      <div class="frow"><label>變動成本 <output id="s_var_o">20</output>%</label><input type="range" id="s_var" min="0" max="40" step="5" value="20"></div>
+      <div class="nfield"><label>完全時薪（元/時）</label><input type="number" id="s_rate" value="800"></div>
+      <div class="nfield"><label>工期（月）</label><input type="number" id="s_months" value="24"></div>
+      <div class="nfield"><label>翻案：超時工時試算</label><input type="number" id="s_over" value="1500"></div>
+    </div>
+    <div class="calc-out">
+      <div class="out-row">
+        <div class="out sm"><div class="out-num" id="s_labor">--</div><div class="out-lbl">可用人力成本（萬）</div></div>
+        <div class="out big2"><div class="out-num" id="s_hours">--</div><div class="out-lbl">燃料總量 / 成本底線（小時）</div></div>
+      </div>
+      <div class="stage-bar" id="s_stage"></div>
+      <div class="out-row">
+        <div class="out sm"><div class="out-num" id="s_monthly">--</div><div class="out-lbl">月平均工時</div></div>
+        <div class="out sm"><div class="out-num" id="s_heads">--</div><div class="out-lbl">需全職人力</div></div>
+        <div class="out sm danger"><div class="out-num" id="s_loss">--</div><div class="out-lbl">超時損失（萬）</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="rule reveal"><span class="rl">決策規則</span><p class="rt">報多少不是看底價，是看你的成本底線——超過燃料總量就在賠錢。把收款節點從「領照」改成「掛號」，把行政延宕的風險轉嫁回業主。</p></div>
+</div></section>
+<section class="sec summary" id="summary"><div class="wrap">
+<div class="sechead"><p class="kick reveal">全課總結</p><h2 class="sec-title reveal">四把鑰匙，與經營者的覺醒</h2></div>
+<div class="chain reveal">
+  <div class="ck"><b>篩選</b><span>不浪費能量</span></div><div class="ca">→</div>
+  <div class="ck"><b>預算與條款</b><span>守利潤、防風險</span></div><div class="ca">→</div>
+  <div class="ck"><b>覆盤</b><span>經驗變數據</span></div><div class="ca">→</div>
+  <div class="ck"><b>整合</b><span>優雅拒絕、精確抓住</span></div>
+</div>
+<div class="tablewrap reveal"><table><thead><tr><th>模組</th><th>角色</th><th>一句話精髓</th></tr></thead><tbody><tr><td>財務</td><td><span class="badge red">底線</span></td><td>用「完全用人成本」算損益，否則獲利都是假象。</td></tr><tr><td>人事</td><td><span class="badge gold">燃料</span></td><td>人均產值才是 14 人事務所的效率真相。</td></tr><tr><td>專案</td><td><span class="badge green">過程</span></td><td>把時間當燃料，靠燃盡圖與合約守住利潤。</td></tr><tr><td>策略</td><td><span class="badge clayb">方向</span></td><td>不可取代性決定定價權，定價權決定利潤空間。</td></tr></tbody></table></div>
+<div class="callout ink reveal"><span class="co-l">結語</span><span class="co-t">畫一棟漂亮的建築是專業；設計一套能自動運轉、健康獲利的事務所系統，是智慧。事務所本身，就是你這輩子最重要的設計作品。</span></div>
+</div></section>
+<footer class="foot"><div class="wrap">
+  <p><b>事務所商業決策能力（下）· 互動複習網頁</b></p>
+  <p>內容主軸：選案 → 執行防禦 → 定位定價 → 業務拓展 → 系統整合。本工具為課程內容的自學整理，所有公式與基準（完全人力成本 1.6–1.8 倍、費率上限、現金儲備 6 個月等）皆為教學示例與經驗值，非財務或法律建議；實際決策請以事務所真實帳務與專業意見為準。</p>
+</div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const num=id=>parseFloat($(id).value)||0;
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+const fmt1=n=>(Math.round(n*10)/10).toLocaleString('en-US');
+
+/* scroll progress + spy */
+const bar=$('scrollbar');
+const navlinks=[...document.querySelectorAll('.links a')];
+const secs=navlinks.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+function onScroll(){
+  const h=document.documentElement;
+  bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
+  let idx=0;const y=h.scrollTop+120;
+  secs.forEach((s,i)=>{if(s.offsetTop<=y)idx=i;});
+  navlinks.forEach((a,i)=>a.classList.toggle('active',i===idx));
+}
+document.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('load',onScroll);
+
+/* reveal */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* helper: stage bar */
+function stageBars(el,total){
+  const stages=[['概念',0.20,false],['基本',0.25,false],['細部',0.35,true],['監造',0.20,false]];
+  el.innerHTML=stages.map(([n,p,ink])=>{
+    const h=total*p;
+    return `<div class="sbar"><span class="sname">${n} ${Math.round(p*100)}%</span><div class="strack"><div class="sfill ${ink?'i':''}" style="width:${p*100}%">${fmt(h)}h</div></div></div>`;
+  }).join('');
+}
+
+/* ---- Calc 1: matrix ---- */
+function calc1(){
+  const s=num('m_s'),p=num('m_p'),v=num('m_v'),r=num('m_r');
+  ['s','p','v','r'].forEach(k=>$('m_'+k+'_o').textContent=num('m_'+k));
+  let ws=num('w_s'),wp=num('w_p'),wv=num('w_v'),wr=num('w_r');
+  let sum=ws+wp+wv+wr; if(sum<=0)sum=1;
+  const score=(s*ws+p*wp+v*wv+r*wr)/sum;
+  $('m_score').textContent=fmt1(score);
+  const vd=$('m_verdict');
+  const flags=[];
+  if(r<2)flags.push('🚫 執行風險 &lt; 2：一票否決，建議直接婉拒');
+  if(p<2)flags.push('🚫 利潤空間 &lt; 2：接近賠錢做功德');
+  if(v<=2&&s<=2)flags.push('⚠️ 策略價值 × 規模潛力 雙低：難有長期回報');
+  let cls,txt;
+  const veto=(r<2||p<2);
+  if(veto){cls='bad';txt='踩到紅線 · 建議婉拒';}
+  else if(score>=4){cls='good';txt='優先承接';}
+  else if(score>=3){cls='warn';txt='可評估 · 談判條件';}
+  else{cls='bad';txt='建議婉拒';}
+  vd.className='verdict '+cls;vd.textContent=txt;
+  $('m_flags').innerHTML = flags.length? flags.map(f=>`<div class="flag">${f}</div>`).join('')
+     : '<div class="flag ok">✓ 未觸發任何決策紅線</div>';
+}
+
+/* ---- Calc 2: full cost ---- */
+function calc2(){
+  const sal=num('c_salary'),mult=num('c_mult');
+  $('c_mult_o').textContent=mult.toFixed(2);
+  const full=sal*mult;
+  $('c_full').textContent=fmt(full);
+  $('c_hidden').textContent=fmt(full-sal);
+  $('c_rate').textContent=fmt(full/160);
+}
+
+/* ---- Calc 3: hours ---- */
+function calc3(){
+  const fee=num('h_fee'),v=num('h_var'),pr=num('h_profit'),rate=num('h_rate');
+  $('h_profit_o').textContent=pr;
+  const labor=(fee - v - fee*pr/100)*10000; // 元
+  const hours=rate>0?labor/rate:0;
+  $('h_total').textContent=(hours>0?fmt(hours):'0')+' 小時';
+  stageBars($('h_stage'),Math.max(hours,0));
+}
+
+/* ---- Calc 4: warning ---- */
+function calc4(){
+  const b=num('a_budget'),u=num('a_used'),pg=num('a_prog');
+  $('a_prog_o').textContent=pg;
+  const pct=b>0?u/b*100:0;
+  $('a_pct').textContent=fmt(pct)+'%';
+  const L=$('a_light'),T=$('a_light_t'),A=$('a_action');
+  let cls,txt,act;
+  if(pct>=90 && pg<90){cls='red';txt='紅燈 · 存亡關頭';act='負責人親自介入。判斷是業主「範疇蔓延」→ 立即對外談判追加費用；若是內部效率問題 → 果斷止損、縮減方案。';}
+  else if(pct>=70 && pct>pg+5){cls='gold';txt='黃燈 · 須提報';act='由專案主持人提交「原因分析報告」，抽調資深人員、收斂方案、停止發散，把消耗率拉回進度線。';}
+  else{cls='green';txt='綠燈 · 健康';act='工時消耗與進度相符，維持現行節奏，持續記錄燃盡狀況即可。';}
+  L.className='light '+cls;T.textContent=txt;A.textContent=act;
+}
+
+/* ---- Calc 5: quote ---- */
+function calc5(){
+  const hrs=num('q_hours'),rate=num('q_rate'),v=num('q_var'),pr=num('q_profit'),bf=num('q_buffer');
+  $('q_profit_o').textContent=pr;$('q_buffer_o').textContent=bf;
+  const labor=hrs*rate/10000; // 萬
+  const costsum=labor+v;
+  const price=costsum*(1+pr/100+bf/100);
+  const cap=num('q_cost')*num('q_cap')/100;
+  $('q_price').textContent=fmt1(price);
+  $('q_costsum').textContent=fmt1(costsum);
+  $('q_capval').textContent=fmt1(cap);
+  const gap=cap-costsum;
+  const G=$('q_gap');
+  if(num('q_cap')<=0||num('q_cost')<=0){G.className='verdict';G.textContent='未設費率上限（純私案估價）';}
+  else if(gap<0){G.className='verdict bad';G.textContent='費率上限低於成本 · 倒貼 '+fmt1(-gap)+' 萬';}
+  else if(cap<price){G.className='verdict warn';G.textContent='上限可打平成本，但吃掉利潤 '+fmt1(price-cap)+' 萬';}
+  else{G.className='verdict good';G.textContent='上限高於理想報價 · 空間充足';}
+}
+
+/* ---- Calc 6: client tier ---- */
+function calc6(){
+  const sc=num('cl_recur')+num('cl_trust')+num('cl_profit')+num('cl_refer');
+  let tier,strat,col;
+  if(sc>=6){tier='A 級';col='clay';strat='戰略夥伴：負責人親自維繫，安排顧問式面談、優先檔期，主動分享產業洞察。把最好的資源留給他。';}
+  else if(sc>=3){tier='B 級';col='clay';strat='一般客戶：系統化自動維繫（電子報、完工週年通知），重點是培養其「轉介紹」潛力，讓他擁有可以吹噓的素材。';}
+  else{tier='C 級';col='clay';strat='單次合作：維持基本禮貌聯繫即可，避免投入過多高階人力；把精力留給 A、B 級客戶。';}
+  $('cl_tier').textContent=tier;
+  $('cl_strategy').textContent=strat;
+}
+
+/* ---- Calc 7: 1500 simulation ---- */
+function calc7(){
+  const total=num('s_total'),pr=num('s_profit'),v=num('s_var'),rate=num('s_rate'),mo=num('s_months'),over=num('s_over');
+  $('s_profit_o').textContent=pr;$('s_var_o').textContent=v;
+  const labor=total*(1-pr/100-v/100); // 萬
+  const hours=rate>0?labor*10000/rate:0;
+  $('s_labor').textContent=fmt1(labor);
+  $('s_hours').textContent=fmt(Math.max(hours,0));
+  stageBars($('s_stage'),Math.max(hours,0));
+  const monthly=mo>0?hours/mo:0;
+  $('s_monthly').textContent=fmt(monthly)+' h';
+  $('s_heads').textContent=fmt1(monthly/160)+' 人';
+  $('s_loss').textContent=fmt1(over*rate/10000);
+}
+
+/* wire all */
+function wire(ids,fn){ids.forEach(id=>{const el=$(id);if(el){el.addEventListener('input',fn);el.addEventListener('change',fn);}});}
+wire(['m_s','m_p','m_v','m_r','w_s','w_p','w_v','w_r'],calc1);
+wire(['c_salary','c_mult'],calc2);
+wire(['h_fee','h_var','h_profit','h_rate'],calc3);
+wire(['a_budget','a_used','a_prog'],calc4);
+wire(['q_hours','q_rate','q_var','q_profit','q_buffer','q_cost','q_cap'],calc5);
+wire(['cl_recur','cl_trust','cl_profit','cl_refer'],calc6);
+wire(['s_total','s_profit','s_var','s_rate','s_months','s_over'],calc7);
+[calc1,calc2,calc3,calc4,calc5,calc6,calc7].forEach(f=>f());
+</script>
+</body>
+</html>
