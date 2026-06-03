@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>事務所商業決策能力（下）· 自我複習簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#23303A; --ink2:#2C3B46; --ink3:#34454F;
+  --paper:#FFFFFF; --text:#1C262E; --muted:#6B7884;
+  --clay:#B0573A; --claydk:#8F4730; --claylt:#F3EBE4; --clayb:#D98A66;
+  --card:#F4F6F7; --line:#D9DFE3;
+  --green:#5E7355; --gold:#B98A2E; --red:#A8392B;
+  --serif:"Noto Serif TC", serif;
+  --sans:"Noto Sans TC", sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:#0d1419;font-family:var(--sans);color:var(--text);overflow:hidden}
+#deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.slide{
+  position:absolute;
+  width:min(100vw, calc(100vh * 16 / 9));
+  height:min(100vh, calc(100vw * 9 / 16));
+  container-type:size;
+  background:var(--paper);
+  overflow:hidden;
+  opacity:0;visibility:hidden;
+  transition:opacity .45s ease;
+  box-shadow:0 0 60px rgba(0,0,0,.4);
+}
+.slide.active{opacity:1;visibility:visible}
+
+/* ---- content frame ---- */
+.frame{position:absolute;inset:0;display:flex;flex-direction:column;padding:6.6cqh 6cqw 3.4cqh}
+.kicker{font-family:var(--sans);font-weight:700;font-size:2.25cqh;letter-spacing:.34em;color:var(--clay);margin-bottom:1.9cqh}
+.title{font-family:var(--serif);font-weight:900;font-size:5.4cqh;line-height:1.22;color:var(--text);margin-bottom:2.7cqh;letter-spacing:.01em}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;font-family:var(--sans);font-size:2.85cqh;line-height:1.62;color:var(--text);min-height:0}
+.lead{font-size:2.95cqh;line-height:1.66;margin-bottom:2.4cqh;color:#2b3942}
+.note{font-size:2.5cqh;color:var(--muted);margin-top:1.8cqh;line-height:1.55}
+b{color:var(--claydk);font-weight:700}
+.hl{font-family:var(--serif);font-weight:900;color:var(--clay);font-size:1.18em}
+
+.ul{list-style:none}
+.ul li{position:relative;padding-left:2.6cqh;margin-bottom:1.25cqh;line-height:1.5}
+.ul li:before{content:"";position:absolute;left:0;top:.62em;width:1cqh;height:1cqh;background:var(--clay);border-radius:50%}
+
+/* ---- footer + rule ---- */
+.rule{background:var(--claylt);border-left:.7cqh solid var(--clay);border-radius:0 .7cqh .7cqh 0;padding:1.7cqh 2.4cqw;margin-top:2.2cqh}
+.rule .rl{font-family:var(--sans);font-weight:700;font-size:1.85cqh;letter-spacing:.3em;color:var(--claydk);display:block;margin-bottom:.7cqh}
+.rule .rt{font-family:var(--sans);font-weight:500;font-size:2.55cqh;color:var(--text);line-height:1.45}
+.footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.5cqh;padding-top:1.1cqh;border-top:1px solid var(--line);font-size:1.8cqh;color:var(--muted);letter-spacing:.05em}
+
+/* ---- cards grids ---- */
+.grid2,.grid3,.grid4{display:grid;gap:1.8cqw;margin:.4cqh 0 1.4cqh}
+.grid2{grid-template-columns:repeat(2,1fr)}
+.grid3{grid-template-columns:repeat(3,1fr)}
+.grid4{grid-template-columns:repeat(4,1fr)}
+.card3{background:var(--card);border:1px solid var(--line);border-top:.5cqh solid var(--clay);border-radius:.6cqh;padding:2.1cqh 1.8cqh}
+.card3 .cn{font-family:var(--serif);font-weight:900;font-size:3.6cqh;color:var(--clay);line-height:1;display:block;margin-bottom:.8cqh}
+.card3 h5{font-family:var(--serif);font-weight:700;font-size:2.85cqh;color:var(--ink);margin-bottom:.9cqh}
+.card3 p{font-size:2.25cqh;line-height:1.5;color:#39474f}
+
+/* ---- two columns ---- */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:2.4cqw;margin-bottom:1.2cqh}
+.col{padding:2.6cqh 2.2cqw;border-radius:.8cqh}
+.col.neutral{background:var(--card);border:1px solid var(--line)}
+.col.clay{background:var(--claylt);border:1px solid #E7D8CC}
+.col .coltag{display:inline-block;font-size:1.85cqh;font-weight:700;letter-spacing:.2em;color:var(--muted);margin-bottom:.8cqh}
+.col.clay .coltag{color:var(--claydk)}
+.col h4{font-family:var(--serif);font-weight:700;font-size:3cqh;margin-bottom:1.3cqh;color:var(--ink)}
+.col .ul li{font-size:2.5cqh;margin-bottom:1cqh}
+
+/* ---- stats ---- */
+.stats{display:grid;gap:1.7cqw;margin:1cqh 0 1.4cqh}
+.stat{background:var(--ink);border-left:.8cqh solid var(--clay);border-radius:0 .7cqh .7cqh 0;padding:2.6cqh 1.9cqh}
+.stat .num{font-family:var(--serif);font-weight:900;font-size:6.6cqh;line-height:1;color:#fff}
+.stat .num .u{font-size:.42em;color:var(--clayb);margin-left:.12em;font-weight:700}
+.stat .lbl{font-family:var(--sans);font-size:2cqh;color:#9FB0BC;margin-top:1.2cqh;line-height:1.4}
+
+/* ---- formula ---- */
+.formula{background:var(--ink);color:#fff;font-family:var(--serif);font-weight:700;font-size:3.15cqh;padding:3cqh 2.6cqw;border-radius:.8cqh;text-align:center;letter-spacing:.02em;line-height:1.5;margin-bottom:1.6cqh}
+.formula b{color:var(--clayb)}
+
+/* ---- table ---- */
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:2.5cqh;margin:.4cqh 0 .6cqh}
+thead th{background:var(--ink);color:#fff;font-weight:700;padding:1.6cqh 1.7cqh;text-align:left;letter-spacing:.04em}
+thead th:first-child{border-radius:.5cqh 0 0 0}
+thead th:last-child{border-radius:0 .5cqh 0 0}
+tbody td{background:#fff;border:1px solid var(--line);padding:1.45cqh 1.7cqh;color:var(--text);line-height:1.45;vertical-align:middle}
+tbody td:first-child{font-weight:500;color:var(--ink)}
+tbody tr:nth-child(even) td{background:#FAFBFC}
+.badge{display:inline-block;padding:.35cqh 1.3cqh;border-radius:5cqh;font-size:1.95cqh;font-weight:700;color:#fff;white-space:nowrap}
+.badge.green{background:var(--green)} .badge.gold{background:var(--gold)}
+.badge.red{background:var(--red)} .badge.clay-b{background:var(--clay)}
+
+/* ---- callout ---- */
+.callout{display:flex;align-items:baseline;gap:1.6cqw;border-radius:.7cqh;padding:1.8cqh 2.2cqw;margin-top:1cqh;line-height:1.5}
+.callout.clay{background:var(--claylt);border-left:.6cqh solid var(--clay)}
+.callout.ink{background:var(--ink)}
+.callout .co-l{font-family:var(--serif);font-weight:700;font-size:2.5cqh;white-space:nowrap}
+.callout.clay .co-l{color:var(--claydk)} .callout.ink .co-l{color:var(--clayb)}
+.callout .co-t{font-size:2.5cqh;color:var(--text)}
+.callout.ink .co-t{color:#E4EAEE}
+
+/* ---- steps ---- */
+.steps{margin:.6cqh 0 1cqh;counter-reset:s}
+.srow{position:relative;background:var(--card);border:1px solid var(--line);border-left:.6cqh solid var(--clay);border-radius:.6cqh;padding:1.7cqh 2cqw;margin-bottom:1.2cqh;font-size:2.7cqh;line-height:1.45}
+.srow b{color:var(--ink)}
+
+/* ---- prop bar ---- */
+.propbar{display:flex;width:100%;height:6.4cqh;border-radius:.6cqh;overflow:hidden;margin:1cqh 0 1.8cqh}
+.seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:2.1cqh;font-weight:700;letter-spacing:.03em}
+.seg.c-clay{background:var(--clay)} .seg.c-ink{background:var(--ink)}
+.seg.c-ink2{background:var(--ink2)} .seg.c-ink3{background:var(--ink3)}
+.seg.c-mut{background:#7C8A95}
+.seg span{padding:0 .5cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* ---- yes/no (slide 5) ---- */
+.yesno{display:flex;align-items:center;gap:2cqw;margin-top:1cqh}
+.yes{background:var(--clay);color:#fff;border-radius:.8cqh;padding:2.6cqh 2cqw;text-align:center;font-family:var(--serif);font-weight:900;font-size:4.2cqh;min-width:18%}
+.yes span{display:block;font-family:var(--sans);font-weight:500;font-size:2cqh;margin-top:.6cqh;color:#fbe9e0}
+.arrowto{font-size:4cqh;color:var(--clay);font-weight:700}
+.nos{flex:1;display:flex;flex-direction:column;gap:1.1cqh}
+.no{background:var(--card);border:1px solid var(--line);border-left:.55cqh solid var(--ink);border-radius:.5cqh;padding:1.4cqh 2cqw;font-family:var(--serif);font-weight:700;font-size:2.7cqh;color:var(--ink)}
+.no span{display:block;font-family:var(--sans);font-weight:400;font-size:2.2cqh;color:var(--muted);margin-top:.25cqh}
+
+/* ---- redlines (slide 9) ---- */
+.redlines{display:flex;flex-direction:column;gap:1.8cqh;margin-top:1.6cqh}
+.redrow{display:flex;align-items:flex-start;gap:1.8cqw;background:#FBF3F1;border:1px solid #EAD4CF;border-left:.6cqh solid var(--red);border-radius:.6cqh;padding:2cqh 2.2cqw;font-size:2.75cqh;line-height:1.5}
+.redrow .rdot{margin-top:.55em;width:1.4cqh;height:1.4cqh;border-radius:50%;background:var(--red);flex:none}
+.redrow b{color:var(--red)}
+
+/* ---- venn (26) ---- */
+.vennwrap{display:flex;justify-content:center;margin:.4cqh 0 .8cqh}
+.venn{height:42cqh;width:auto}
+
+/* ---- quantum jump (30) ---- */
+.qjump{display:flex;align-items:flex-end;justify-content:center;gap:2.4cqw;margin:1cqh 0 1.4cqh}
+.qcol{text-align:center}
+.qbars{width:14cqw;height:26cqh;display:flex;flex-direction:column;justify-content:flex-end;border-radius:.5cqh;overflow:hidden;border:1px solid var(--line)}
+.qpub{background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2cqh;font-weight:700}
+.qpri{background:var(--clay);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2cqh;font-weight:700}
+.qcap{font-size:2.15cqh;color:var(--ink);margin-top:1cqh;line-height:1.35;font-weight:500}
+.qarrow{font-size:3.6cqh;color:var(--clay);font-weight:700;align-self:center}
+
+/* ---- P-S-T (31) ---- */
+.pst{display:flex;align-items:stretch;gap:1.6cqw;margin-top:2.5cqh}
+.pstep{flex:1;background:var(--card);border:1px solid var(--line);border-top:.6cqh solid var(--clay);border-radius:.7cqh;padding:2.8cqh 1.9cqw}
+.pstep .pn{font-family:var(--serif);font-weight:900;font-size:3.6cqh;color:var(--clay);display:block}
+.pstep h5{font-family:var(--sans);font-weight:700;letter-spacing:.18em;font-size:2cqh;color:var(--muted);margin:.5cqh 0 1.3cqh}
+.pstep p{font-size:2.45cqh;line-height:1.5;color:#39474f}
+.parr{align-self:center;font-size:3.4cqh;color:var(--clay);font-weight:700}
+
+/* ---- timeline (35) ---- */
+.timeline{position:relative;display:flex;justify-content:space-between;margin:5cqh 1cqw 2cqh;gap:1cqw}
+.tline{position:absolute;left:0;right:0;top:1.2cqh;height:.4cqh;background:var(--line)}
+.tnode{position:relative;flex:1;text-align:center}
+.tdot{position:relative;z-index:2;width:2.4cqh;height:2.4cqh;border-radius:50%;background:var(--clay);display:inline-block;border:.5cqh solid #fff;box-shadow:0 0 0 1px var(--line)}
+.tlabel{font-family:var(--serif);font-weight:700;font-size:2.75cqh;color:var(--ink);margin-top:1.4cqh}
+.tnode p{font-size:2.1cqh;color:var(--muted);margin-top:.5cqh;line-height:1.4;padding:0 1cqw}
+
+/* ---- pyramid (36) ---- */
+.pyramid{display:flex;flex-direction:column;align-items:center;gap:1.3cqh;margin:1.4cqh 0}
+.tier{border-radius:.6cqh;padding:2cqh 2cqw;text-align:center}
+.tier b{font-family:var(--serif);font-weight:700;font-size:2.9cqh;display:block;margin-bottom:.5cqh}
+.tier span{font-size:2.2cqh;line-height:1.4}
+.t-a{width:62%;background:var(--ink);color:#fff} .t-a span{color:#cdd8df}
+.t-b{width:78%;background:var(--ink3);color:#fff} .t-b span{color:#d3dde2}
+.t-c{width:94%;background:var(--card);border:1px solid var(--line);color:var(--ink)} .t-c span{color:var(--muted)}
+
+/* ---- ladder (40) ---- */
+.ladder{display:flex;flex-direction:column;gap:1.3cqh;margin:1cqh 0 1.4cqh}
+.rung{border-radius:.6cqh;padding:1.9cqh 2.2cqw;color:#fff;display:flex;align-items:baseline;gap:1.6cqw}
+.rung b{font-family:var(--serif);font-weight:700;font-size:2.8cqh;white-space:nowrap}
+.rung span{font-size:2.4cqh;color:#e7edf0}
+.r1{background:var(--ink3);margin-right:24%}
+.r2{background:var(--ink2);margin-right:12%}
+.r3{background:var(--ink)}
+
+/* ---- quad (43) ---- */
+.quad{display:grid;grid-template-columns:1fr 1fr;gap:1.8cqw;margin:.6cqh 0}
+.q{background:var(--card);border:1px solid var(--line);border-left:.55cqh solid var(--clay);border-radius:.6cqh;padding:2cqh 1.9cqw}
+.q .qk{display:inline-block;font-family:var(--sans);font-weight:700;font-size:1.85cqh;letter-spacing:.2em;color:var(--clay);background:#fff;border:1px solid #E7D8CC;border-radius:4cqh;padding:.25cqh 1.1cqh;margin-bottom:1cqh}
+.q h5{font-family:var(--serif);font-weight:700;font-size:2.85cqh;color:var(--ink);margin-bottom:.7cqh}
+.q p{font-size:2.2cqh;line-height:1.45;color:#39474f}
+
+/* ---- links (44) ---- */
+.links{display:flex;flex-direction:column;gap:1.4cqh;margin-bottom:.6cqh}
+.lrow{display:flex;align-items:center;gap:1.8cqw;background:var(--card);border:1px solid var(--line);border-radius:.6cqh;padding:1.7cqh 2cqw;font-size:2.6cqh;line-height:1.45}
+.lk{font-family:var(--serif);font-weight:700;font-size:2.7cqh;color:var(--clay);white-space:nowrap;min-width:18%}
+
+/* ---- chain (53) ---- */
+.chain{display:flex;align-items:stretch;gap:1.4cqw;margin-top:4cqh}
+.ck{flex:1;background:var(--ink);color:#fff;border-radius:.7cqh;border-bottom:.7cqh solid var(--clay);padding:3cqh 1.6cqw;text-align:center}
+.ck b{font-family:var(--serif);font-weight:900;font-size:3.6cqh;display:block;margin-bottom:1cqh}
+.ck span{font-size:2.25cqh;color:#c8d3da;line-height:1.4}
+.ca{align-self:center;font-size:3.4cqh;color:var(--clay);font-weight:700}
+
+/* ============ COVER ============ */
+.slide.cover,.slide.divider,.slide.closing{background:var(--ink)}
+.bar{position:absolute;left:6cqw;top:0;bottom:0;width:.9cqw;background:var(--clay)}
+.cframe{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 9cqw 0 11cqw}
+.ckicker{font-family:var(--sans);font-weight:700;font-size:2.1cqh;letter-spacing:.4em;color:var(--clayb);margin-bottom:3cqh}
+.ctitle{font-family:var(--serif);font-weight:900;font-size:9.5cqh;line-height:1.16;color:#fff;letter-spacing:.02em}
+.ctitle .vol{color:var(--clayb)}
+.csub{font-family:var(--sans);font-weight:500;font-size:3cqh;color:#B7C5CE;margin-top:3.4cqh;letter-spacing:.04em}
+.cmeta{display:flex;gap:3cqw;margin-top:5cqh;font-size:2.1cqh;color:#7C8C97;letter-spacing:.06em}
+.cmeta span{border-top:1px solid #3c4d57;padding-top:1.2cqh}
+.cpage{position:absolute;left:11cqw;bottom:5cqh;font-size:1.8cqh;color:#5f7079;letter-spacing:.1em}
+
+/* ============ DIVIDER ============ */
+.roman{position:absolute;right:3cqw;top:50%;transform:translateY(-50%);font-family:var(--serif);font-weight:900;font-size:66cqh;line-height:1;color:rgba(255,255,255,.045);user-select:none}
+.dframe{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 9cqw 0 11cqw}
+.dnum{font-family:var(--sans);font-weight:700;font-size:2.1cqh;letter-spacing:.45em;color:var(--clayb);margin-bottom:2.4cqh}
+.dtitle{font-family:var(--serif);font-weight:900;font-size:10cqh;line-height:1.1;color:#fff;letter-spacing:.03em}
+.dsub{font-family:var(--sans);font-weight:700;font-size:2.5cqh;letter-spacing:.34em;color:var(--clayb);margin-top:2.4cqh}
+.ddesc{font-size:2.7cqh;color:#AEBDC8;max-width:64%;margin-top:3cqh;line-height:1.65}
+.dpage{position:absolute;right:5cqw;bottom:5cqh;font-size:1.8cqh;color:#5f7079;letter-spacing:.1em}
+
+/* ============ CLOSING ============ */
+.clframe{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 9cqw 0 11cqw}
+.clframe .ckicker{margin-bottom:3.4cqh}
+.bigquote{font-family:var(--serif);font-weight:700;font-size:6cqh;line-height:1.42;color:#fff}
+.bigquote em{font-style:normal;color:var(--clayb)}
+.clline{font-size:2.9cqh;color:#B7C5CE;margin-top:3.4cqh;letter-spacing:.03em}
+.clact{margin-top:4.4cqh;background:rgba(255,255,255,.05);border-left:.6cqh solid var(--clay);border-radius:0 .6cqh .6cqh 0;padding:1.8cqh 2.4cqw;font-size:2.45cqh;color:#dbe3e8;line-height:1.5;max-width:78%}
+.clact-l{font-family:var(--serif);font-weight:700;color:var(--clayb);margin-right:1.2cqw}
+
+/* ============ NAV ============ */
+#progress{position:fixed;top:0;left:0;height:3px;background:var(--clay);z-index:50;transition:width .3s}
+#nav{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:14px;background:rgba(35,48,58,.82);backdrop-filter:blur(6px);padding:7px 14px;border-radius:30px;font-family:var(--sans)}
+#nav button{background:none;border:none;color:#cbd6dd;font-size:17px;cursor:pointer;width:26px;height:26px;border-radius:50%;line-height:1;transition:.2s}
+#nav button:hover{background:rgba(255,255,255,.12);color:#fff}
+#counter{color:#cbd6dd;font-size:13px;letter-spacing:.08em;min-width:62px;text-align:center;font-variant-numeric:tabular-nums}
+#hint{position:fixed;bottom:54px;left:50%;transform:translateX(-50%);z-index:50;color:#8a99a3;font-size:12px;letter-spacing:.1em;font-family:var(--sans);animation:fade 5s forwards}
+@keyframes fade{0%,70%{opacity:1}100%{opacity:0}}
+
+@media print{
+  @page{size:landscape;margin:0}
+  html,body{overflow:visible;background:#fff}
+  #deck{position:static;display:block}
+  .slide{position:relative!important;opacity:1!important;visibility:visible!important;
+    width:100vw;height:56.25vw;max-height:100vh;box-shadow:none;break-after:page;page-break-after:always}
+  #nav,#progress,#hint{display:none!important}
+}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="deck">
+<section class="slide cover">
+      <div class="bar"></div>
+      <div class="cframe">
+        <div class="ckicker">ARCH · BUSINESS DECISIONS · PART Ⅱ</div>
+        <h1 class="ctitle">建築師事務所<br>商業決策能力<span class="vol">（下）</span></h1>
+        <p class="csub">14 人事務所的經營導航系統 —— 財務 × 人事 × 專案 × 策略</p>
+        <div class="cmeta">
+          <span>專案經營 · 策略拓展 · 系統整合</span>
+          <span>自我複習簡報 · 55 頁</span>
+        </div>
+      </div>
+      <div class="cpage">事務所商業決策能力（下）</div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">課程總覽</div>
+        <h2 class="title">從「救火隊長」到「系統設計師」</h2>
+        <div class="body"><p class="lead">核心命題：<b>14 人規模下，最稀缺的資源不是錢，是「關鍵人才的產能」。</b>全課把四大模組整合成一套可量化、可預警、可自我修正的經營導航系統。</p><div class="grid4"><div class="card3"><span class="cn">財務</span><h5>看懂錢</h5><p>邊際貢獻、現金流、單案損益——經營的計分板。</p></div><div class="card3"><span class="cn">人事</span><h5>用對人</h5><p>完全用人成本 1.6–1.8 倍，人均產值是效率真相。</p></div><div class="card3"><span class="cn">專案</span><h5>做成利潤</h5><p>工時即燃料，靠燃盡圖與合約守住每一分毛利。</p></div><div class="card3"><span class="cn">策略</span><h5>選對方向</h5><p>不可取代性決定定價權，定價權決定利潤空間。</p></div></div></div>
+        <div class="rule"><span class="rl">核心命題</span><p class="rt">四大模組像柱與樑，牽一髮而動全身——別再局部優化，要建立能預測漣漪效應的系統思維。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>02 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">貫穿全課的對照基準</div>
+        <h2 class="title">先記住這幾個數字</h2>
+        <div class="body"><div class="stats" style="grid-template-columns:repeat(5,1fr)"><div class="stat"><div class="num">1.6–1.8<span class='u'>×</span></div><div class="lbl">完全用人成本（月薪倍率）</div></div><div class="stat"><div class="num">12<span class='u'>%</span></div><div class="lbl">競圖／提案成功率</div></div><div class="stat"><div class="num">5–10<span class='u'>%</span></div><div class="lbl">政府標案費率上限</div></div><div class="stat"><div class="num">6<span class='u'>個月</span></div><div class="lbl">建議現金儲備水位</div></div><div class="stat"><div class="num">6–7 : 3–4</div><div class="lbl">標案 : 私案 健康組合</div></div></div></div>
+        <div class="rule"><span class="rl">對照基準</span><p class="rt">在 12% 的競爭現實中，要把 100% 的子彈，射向那 12% 最值得爭取的目標。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>03 / 55</span></div>
+      </div>
+    </section>
+<section class="slide divider">
+      <div class="roman">Ⅰ</div>
+      <div class="bar"></div>
+      <div class="dframe">
+        <div class="dnum">PART Ⅰ</div>
+        <h2 class="dtitle">接什麼案？</h2>
+        <div class="dsub">CASE SCREENING & SOURCE LOGIC</div>
+        <p class="ddesc">「不接什麼」比「接什麼」更決定長期發展。用篩選矩陣，把接案決策從「憑感覺」轉成「數據化評估」。</p>
+      </div>
+      <div class="dpage">04 / 55</div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・案件篩選矩陣</div>
+        <h2 class="title">機會成本：一個 Yes，三個 No</h2>
+        <div class="body"><p class="lead">對一個平庸、低利、業主反覆的案子說 <b>Yes</b>，你其實同時對三件事說 <b>No</b>。</p><div class="yesno">
+              <div class="yes">YES<span>接下平庸案</span></div>
+              <div class="arrowto">→</div>
+              <div class="nos">
+                <div class="no">NO · 對團隊成長<span>制式修改稀釋專業熱情</span></div>
+                <div class="no">NO · 對利潤穩定<span>低貢獻吃掉優質案利潤</span></div>
+                <div class="no">NO · 對未來偉大案件<span>產能被瑣事塞滿，無力承接</span></div>
+              </div>
+            </div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">14 人不能像小工作室爆肝硬撐，也沒有大事務所的冗餘吸收虧損——產能是極珍貴且有限的資源。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>05 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・案件篩選矩陣</div>
+        <h2 class="title">四大評估維度</h2>
+        <div class="body"><div class="grid4"><div class="card3"><span class="cn">規模潛力</span><h5>填補效率</h5><p>看單位時間能產出的穩定營收與複雜度，而非單純的總造價。</p></div><div class="card3"><span class="cn">利潤空間</span><h5>生存基礎</h5><p>設計費扣外包後，是否足付 1.6–1.8 倍完全人力成本。</p></div><div class="card3"><span class="cn">策略價值</span><h5>未來門票</h5><p>能否進新領域、具得獎潛力、是大業主的試金石。</p></div><div class="card3"><span class="cn">執行風險</span><h5>致災點</h5><p>業主反覆度、收款節點、法規不確定性——最常被忽略。</p></div></div><p class="note">操作方式：每個維度給 <b>1–5 分</b>（1 最低、5 最高）。</p></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">沒有策略價值、利潤又平平的案子，就是你最該拒絕的對象。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>06 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・案件篩選矩陣</div>
+        <h2 class="title">動態加權：狀態決定權重</h2>
+        <div class="body"><p class="lead">四維度重要性並非永遠相等。身為經營者，要依事務所<b>當下狀態</b>設定加權。</p><p class="note">情境範例：剛兩案結案、產能空轉、現金流壓力大時——</p><div class="propbar"><div class="seg c-clay" style="width:40%"><span>利潤空間 40%</span></div><div class="seg c-ink" style="width:30%"><span>規模潛力 30%</span></div><div class="seg c-ink3" style="width:20%"><span>執行風險 20%</span></div><div class="seg c-mut" style="width:10%"><span>策略 10%</span></div></div><p class="note">急需現金 → 利潤與規模加重；品牌暫非首要 → 策略價值調低。</p></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">權重不是一成不變的設定，而是隨事務所現金與品牌狀態滾動調整的決策旋鈕。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>07 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・案件篩選矩陣</div>
+        <h2 class="title">情境演練：大數字 ≠ 高價值</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><span class="coltag">大數字</span><h4>案件 A · 5,000 萬公共工程</h4><ul class="ul"><li>總造價高、利潤表面不錯</li><li>法規複雜、業主以難搞聞名</li><li>付款節點極差 → 執行風險 <b>1 分</b></li></ul></div><div class="col clay"><span class="coltag">真實價值</span><h4>案件 B · 2,000 萬私人廠辦</h4><ul class="ul"><li>造價較低，但業主授權度高</li><li>流程標準化、收款準時</li><li>執行風險 <b>5 分</b>、策略價值 2 分</li></ul></div></div><div class="callout clay"><span class="co-l">加權後</span><span class="co-t">B 的總分往往反而更高——矩陣讓你從對「5,000 萬」的盲目崇拜中冷靜下來。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">接案前不要只看設計費總額，要看它對「現金儲備」的佔用時間與真實經營價值。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>08 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・案件篩選矩陣</div>
+        <h2 class="title">決策紅線：一票否決權</h2>
+        <div class="body"><div class="redlines">
+        <div class="redrow"><span class="rdot"></span><div><b>執行風險 &lt; 2 分</b>　收款極差或業主有誠信疑慮，再高分也不接。</div></div>
+        <div class="redrow"><span class="rdot"></span><div><b>利潤空間 &lt; 1.2 倍人力成本</b>　等於賠錢做功德，對 14 人組織不可持續。</div></div>
+        <div class="redrow"><span class="rdot"></span><div><b>策略價值 × 規模潛力 雙低</b>　不賺錢、沒品牌、又耗瑣碎人力 → 勇敢拒絕。</div></div>
+        </div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">除了總分，還要設「一票否決」紅線——這能保護你的事務所不至於陷入災難。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>09 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・標案 vs. 私案</div>
+        <h2 class="title">兩套生存規則</h2>
+        <div class="body"><table><thead><tr><th>比較維度</th><th>政府標案</th><th>私人委託</th></tr></thead><tbody><tr><td>核心邏輯</td><td>程序正義</td><td>人脈與品牌</td></tr><tr><td>進入門檻</td><td>繁複文書、競圖沉沒成本高</td><td>案績與信任、決策快</td></tr><tr><td>定價權</td><td>費率鎖死，毛利有天花板</td><td>可價值定價（Value-based）</td></tr><tr><td>收款風險</td><td>拿得到，但流程僵化</td><td>節點好商量，但怕倒帳</td></tr></tbody></table></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">標案是長跑，靠制度與行政配合；私案是衝刺，靠品牌與快速現金回籠。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>10 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・標案 vs. 私案</div>
+        <h2 class="title">真實毛利率的隱形殺手</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><h4>標案的隱形成本</h4><ul class="ul"><li><b>行政負擔</b>：跨部會審查、公文往返</li><li>非設計性工時佔比極高</li><li>高級戰力天天開會，無暇處理設計</li></ul></div><div class="col clay"><h4>私案的隱形成本</h4><ul class="ul"><li><b>業主管理</b>：情緒勞動、隨時修改</li><li>傳張照片就要改、看完風水要動</li><li>缺乏範疇界定就吃掉所有利潤</li></ul></div></div><div class="callout clay"><span class="co-l">金句</span><span class="co-t">在私案，1 小時的繪圖工時背後，可能隱藏著 3 小時的安撫與說明工時。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">真正的經營高手看的是「真實毛利率」——把沒寫進合約、卻實實在在消耗團隊能量的成本算進去。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>11 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・標案 vs. 私案</div>
+        <h2 class="title">14 人組合策略：6:4 或 7:3</h2>
+        <div class="body"><div class="propbar"><div class="seg c-ink" style="width:65%"><span>標案 60–70%　生存基石</span></div><div class="seg c-clay" style="width:35%"><span>私案 30–40%　利潤加速器</span></div></div><div class="cols"><div class="col neutral"><h4>60–70% 政府標案（核心水位）</h4><ul class="ul"><li>穩定的長期營收預測</li><li>建立專業的社會信用</li><li>毛利不高但確保團隊規模</li></ul></div><div class="col clay"><h4>30–40% 私人委託（利潤加速器）</h4><ul class="ul"><li>周轉快、現金早入帳</li><li>設計發揮空間大</li><li>緩解標案收款緩慢壓力</li></ul></div></div><div class="callout ink"><span class="co-l">經營哲學</span><span class="co-t">用私案的利潤去「供養」那些具理想色彩、但利潤微薄的公共標案。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">比例極端化（如 90% 標案）會讓現金流失去彈性、行政過載、人才流失——比例才是關鍵。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>12 / 55</span></div>
+      </div>
+    </section>
+<section class="slide divider">
+      <div class="roman">Ⅱ</div>
+      <div class="bar"></div>
+      <div class="dframe">
+        <div class="dnum">PART Ⅱ</div>
+        <h2 class="dtitle">做成利潤</h2>
+        <div class="dsub">EXECUTION & DEFENSE</div>
+        <p class="ddesc">選到好案不代表利潤落袋。把「時間」視為限額燃料，用工時預算、燃盡圖與合約，守住每一分毛利。</p>
+      </div>
+      <div class="dpage">13 / 55</div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・工時預算與超時預警</div>
+        <h2 class="title">工時即燃料：先算再畫</h2>
+        <div class="body"><p class="lead">最常見的悲劇：負責人在案子初期充滿熱情、投入超比例心力做概念，等進入細部與工務階段才驚覺<b>工時預算早已燒完</b>。</p><div class="grid3"><div class="card3"><h5>確立邊界</h5><p>明確讓團隊知道：這個案子有多少「資源」可以揮霍。</p></div><div class="card3"><h5>決策依據</h5><p>業主提額外要求時，能立刻判斷是否超時、是否追加費用。</p></div><div class="card3"><h5>效率指標</h5><p>工時數據反應團隊熟練度，幫你優化內部 SOP。</p></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">動筆畫第一張草圖前，先知道燃料箱裡有多少油，以及每段路程該分配多少。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>14 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・工時預算與超時預警</div>
+        <h2 class="title">設計階段工時配比 20 / 25 / 35 / 20</h2>
+        <div class="body"><div class="propbar"><div class="seg c-clay" style="width:18%"><span>概念 15–20%</span></div><div class="seg c-ink" style="width:23%"><span>基本 20–25%</span></div><div class="seg c-ink2" style="width:33%"><span>細部 30–35%</span></div><div class="seg c-ink3" style="width:23%"><span>監造 20–25%</span></div></div><table><thead><tr><th>階段</th><th>配比</th><th>風險提示</th></tr></thead><tbody><tr><td>概念設計與方案</td><td><span class="badge gold">15–20%</span></td><td>最危險，易暴衝到 40–50%；設方案數量上限</td></tr><tr><td>基本設計與執照</td><td><span class="badge green">20–25%</span></td><td>超時通常代表溝通往返過於頻繁</td></tr><tr><td>細部設計與施工圖</td><td><span class="badge green">30–35%</span></td><td>工時最集中，靠出圖 SOP 減少重複勞動</td></tr><tr><td>施工監造與結案</td><td><span class="badge gold">20–25%</span></td><td>跨度最長，工地突發狀況最易偷走工時</td></tr></tbody></table></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">別在起跑點就燒光燃料——概念階段投入 40–50% 工時，是 14 人事務所最常見的陷阱。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>15 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・工時預算與超時預警</div>
+        <h2 class="title">可用工時精算公式</h2>
+        <div class="body"><div class="formula">可支用總工時　=　( 設計費總額 − <b>變動成本</b> − <b>利潤目標</b> )　÷　平均每小時完全人力成本</div><div class="grid3"><div class="card3"><h5>變動成本</h5><p>外包（結構／機電／景觀）、交通、曬圖等。</p></div><div class="card3"><h5>利潤目標</h5><p>身為經營者必須賺到的淨利，建議至少 20–30%。</p></div><div class="card3"><h5>完全時薪</h5><p>全員月總成本 ÷ 總可用工時（每人月約 160 小時）。</p></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">從財務底線回推「燃料總量」，再依比例分配給各階段——這就是你的報價底線。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>16 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・工時預算與超時預警</div>
+        <h2 class="title">實例推演：500 萬私宅</h2>
+        <div class="body"><div class="steps"><div class="srow">設計費 <b>500 萬</b>　−　外包（結構30＋機電20＋其他10）= <b>440 萬</b></div><div class="srow">440 萬　−　利潤目標 25%（125 萬）= <b>315 萬</b> 可支用人力成本</div><div class="srow">315 萬　÷　1,500 元/時　=　<span class="hl">2,100 小時</span>（燃料總量）</div><div class="srow">概念階段 2,100 × 20% = 420 小時　÷ 3 人 ≈ 每人 140 小時 ≈ <b>3.5 週</b></div></div><div class="callout clay"><span class="co-l">啟示</span><span class="co-t">算出「420 小時」後，你就不能隨口說「大家再多試幾種立面」——每多試一週，就在削減利潤。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">當你算出具體小時數，對案子的掌握感會完全不同——時間是會見底的燃料。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>17 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・工時預算與超時預警</div>
+        <h2 class="title">燃盡圖（Burndown Chart）</h2>
+        <div class="body"><div class="chartwrap"><svg viewBox="0 0 100 50" preserveAspectRatio="xMidYMid meet" class="burn">
+  <rect x="11" y="3" width="85" height="39" fill="none" stroke="#D9DFE3" stroke-width="0.3"/>
+  <polygon points="11,42 96,42 96,30 11,13" fill="#A8392B" opacity="0.07"/>
+  <line x1="11" y1="3" x2="96" y2="42" stroke="#6B7884" stroke-width="0.5" stroke-dasharray="2 1.5"/>
+  <path d="M11,3 C 30,4 40,19 55,25 C 70,31 82,40 96,42" fill="none" stroke="#B0573A" stroke-width="0.9"/>
+  <text x="52" y="9" font-size="2.8" fill="#6B7884">理想燃燒線（均勻消耗）</text>
+  <text x="62" y="37" font-size="2.8" fill="#B0573A">實際燃燒線</text>
+  <text x="9" y="5" font-size="2.6" fill="#6B7884" text-anchor="end">工時</text>
+  <text x="96" y="48" font-size="2.6" fill="#6B7884" text-anchor="end">時間進度 →</text>
+</svg></div><div class="cols"><div class="col neutral"><h4>實際線在理想線「下方」</h4><ul class="ul"><li>最危險的信號</li><li>進度還沒過半、工時卻燒掉一大半</li><li>= 超時預警的觸發點</li></ul></div><div class="col clay"><h4>實際線在理想線「上方」</h4><ul class="ul"><li>工時消耗太慢，通常不是好事</li><li>可能專案停滯、業主沒回應</li><li>未來恐有暴增風險</li></ul></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">負責人不需盯著每個人的畫圖細節，但必須盯著這張燃盡圖。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>18 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・工時預算與超時預警</div>
+        <h2 class="title">超時預警：兩道紅線</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><span class="coltag">黃燈 70%</span><h4>第一道紅線 · 消耗達 70%</h4><ul class="ul"><li>階段工時燒掉 7 成、進度卻未到位</li><li>專案主持人提交「原因分析報告」</li><li>抽調資深人員，收斂方案、停止發散</li></ul></div><div class="col clay"><span class="coltag">紅燈 90%</span><h4>第二道紅線 · 消耗達 90%</h4><ul class="ul"><li>已是「存亡關頭」，負責人親自介入</li><li>判斷責任：是業主的「範疇蔓延」嗎？</li><li>對外談判追加費用，或對內止損</li></ul></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">為了不讓虧損成為既定事實，必須在 70% 與 90% 設下防禦點，及時內部優化或外部談判。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>19 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第四節・合約五大保護條款</div>
+        <h2 class="title">合約是利潤的防波堤（總覽）</h2>
+        <div class="body"><p class="lead">角色轉型：從「首席設計師」→ <b>風險管理者（CRO）</b>。議價決定營收天花板，<b>議約決定獲利地平線</b>。</p><div class="grid3"><div class="card3"><span class="cn">①</span><h5>範疇界定</h5><p>正面表列交付物 ＋ 負面表列排除事項，雙重保險。</p></div><div class="card3"><span class="cn">②</span><h5>追加費用</h5><p>量化「重大變更」、設修改次數上限。</p></div><div class="card3"><span class="cn">③</span><h5>智財歸屬</h5><p>區分使用權與版權，防「拿圖走人」。</p></div></div><div class="grid2"><div class="card3"><span class="cn">④</span><h5>賠償限制</h5><p>賠償上限與「實領設計費」掛鉤——事務所保命符。</p></div><div class="card3"><span class="cn">⑤</span><h5>終止退場</h5><p>按「已完成工時百分比」請款，而非僅依行政進度。</p></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">清晰的條款不是愛計較，而是對雙方合作關係的尊重——模糊合約才是糾紛的溫床。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>20 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第四節・合約五大保護條款</div>
+        <h2 class="title">條款細解：範疇 × 追加 × 智財</h2>
+        <div class="body"><div class="grid3"><div class="card3"><span class="cn">①</span><h5>範疇界定</h5><p>正面表列「交付物清單＋會議次數」；負面表列明確排除（如室內裝修、綠建築標章）。</p></div><div class="card3"><span class="cn">②</span><h5>追加費用</h5><p>量化重大變更（樓地板 &gt;10%）；修改 3 次內，第 4 次加計 30% 管理費。</p></div><div class="card3"><span class="cn">③</span><h5>智財歸屬</h5><p>使用權限本案基地一棟；版權歸事務所；防拿圖走人設後續權利金。</p></div></div><div class="callout clay"><span class="co-l">模糊 vs 保護</span><span class="co-t">「乙方負責所有政府申辦」→ 改為「僅含建照申請；都審、環評、室裝另行議定」。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">別用「大幅度修改」這種模糊詞——律師與法官的理解和建築師完全不同，要用量化指標。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>21 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第四節・合約五大保護條款</div>
+        <h2 class="title">條款細解：賠償上限 × 退場機制</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><h4>④ 損害賠償限制（保命符）</h4><ul class="ul"><li>不接受「無限賠償責任」</li><li>賠償累計上限 = <b>實際領得設計費總額</b></li><li>設責任除外（業主自行變更、不可抗力）</li></ul></div><div class="col clay"><h4>⑤ 終止與退場機制</h4><ul class="ul"><li>按「已完成工時百分比」請款</li><li>完成 90% 細設，喊停就能領 90% 酬勞</li><li>停工逾 6 個月：可調費或主動終止</li></ul></div></div><div class="callout ink"><span class="co-l">關鍵</span><span class="co-t">一次天價賠償就足以讓 14 人事務所倒閉——賠償上限與實領費掛鉤是議約必爭。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">退場機制要回歸工時邏輯，確保專案非正常中止時，團隊的勞動成果能得到應有報酬。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>22 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第五節・結案覆盤 SOP</div>
+        <h2 class="title">結案覆盤：優化系統而非審判個人</h2>
+        <div class="body"><div class="callout ink"><span class="co-l">心態</span><span class="co-t">覆盤是為了「優化系統」，不是「審判個人」——以診斷系統開場，團隊才敢說真話。</span></div><div class="grid3"><div class="card3"><h5>報價系統</h5><p>是否低估了該單位的行政流程複雜度？</p></div><div class="card3"><h5>合約系統</h5><p>是否沒寫清楚「修改次數限制」？</p></div><div class="card3"><h5>SOP 系統</h5><p>是否人力配置冗長、缺乏標準圖塊與工作流？</p></div></div><p class="note">兩大健康指標：<b>人均產值</b>（低於均值代表稀釋效率）、<b>收款天數 DSO</b>。</p></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">結案後的那一小時，比案子進行中的任何時刻都重要——它是為下次報價準備的「戰鬥數據」。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>23 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第五節・結案覆盤 SOP</div>
+        <h2 class="title">工時偏差三大原因 ＋ 數據閉環</h2>
+        <div class="body"><div class="grid3"><div class="card3"><span class="cn">A</span><h5>範疇蔓延</h5><p>業主不斷「順便」、團隊照單全收 → 修合約條款／建追加報價單 SOP。</p></div><div class="card3"><span class="cn">B</span><h5>低估複雜度</h5><p>評估執行風險太樂觀 → 更新篩選矩陣，難度係數自動 ×1.5。</p></div><div class="card3"><span class="cn">C</span><h5>執行效率／技術債</h5><p>檔案混亂、重複出圖 → 建 BIM 範本與 Notion 管理系統。</p></div></div><div class="callout clay"><span class="co-l">數據閉環</span><span class="co-t">更新報價模板 → 修正篩選矩陣 → 案例庫建檔，讓這次的慘痛變成下次的精確數據。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">經營事務所不是靠運氣，而是靠這套不斷自我修正的系統。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>24 / 55</span></div>
+      </div>
+    </section>
+<section class="slide divider">
+      <div class="roman">Ⅲ</div>
+      <div class="bar"></div>
+      <div class="dframe">
+        <div class="dnum">PART Ⅲ</div>
+        <h2 class="dtitle">收高價</h2>
+        <div class="dsub">POSITIONING · PRICING · PITCH</div>
+        <p class="ddesc">定位決定你的價值，價值決定你的價格。找到那份讓客戶「非你不可」的不可取代性。</p>
+      </div>
+      <div class="dpage">25 / 55</div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・不可取代性定位</div>
+        <h2 class="title">三要素定位框架</h2>
+        <div class="body"><div class="vennwrap"><svg viewBox="0 0 120 70" class="venn">
+  <circle cx="45" cy="30" r="26" fill="#23303A" opacity="0.10"/>
+  <circle cx="75" cy="30" r="26" fill="#B0573A" opacity="0.13"/>
+  <circle cx="60" cy="48" r="26" fill="#34454F" opacity="0.10"/>
+  <text x="33" y="22" font-size="4.2" fill="#23303A" text-anchor="middle">目標客戶</text>
+  <text x="88" y="22" font-size="4.2" fill="#8F4730" text-anchor="middle">核心強項</text>
+  <text x="60" y="63" font-size="4.2" fill="#34454F" text-anchor="middle">差異化服務</text>
+  <text x="60" y="36" font-size="4.6" fill="#8F4730" text-anchor="middle" font-weight="700">不可取代性</text>
+</svg></div><p class="note">通才式經營的兩大致命風險：<b>定價權缺失</b>（淪為比價）＋ <b>資源過度分散</b>。定位的本質 = 選擇與捨棄的藝術。</p></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">當三要素產生交集，那就是你的不可取代性所在——你的價值不再由比價決定。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>26 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・不可取代性定位</div>
+        <h2 class="title">案例對照：Q-LAB vs. 十彥建築</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><h4>Q-LAB（曾柏庭）· 技術導向</h4><ul class="ul"><li>國際事務所歷練 → 技術基因</li><li>大跨距結構、複雜幾何、系統邏輯</li><li>Q-SALON：把專業轉成可感知的品牌風格</li></ul></div><div class="col clay"><h4>十彥建築（兩個彥）· 對話式經營</h4><ul class="ul"><li>互補合夥：主外論述 × 主內品質</li><li>「建築文案」作為無聲的說服力</li><li>把術語轉成有溫度的故事</li></ul></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">Q-LAB 把「技術偏執」築成進入門檻；十彥用「論述能力」建立感性的專業定位——兩條不同的護城河。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>27 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・定價策略與品牌訊號</div>
+        <h2 class="title">價格即訊號</h2>
+        <div class="body"><div class="grid3"><div class="card3"><h5>稀缺性</h5><p>你的時間很貴，因為很多人在排隊等你的服務。</p></div><div class="card3"><h5>品質保證</h5><p>你敢開這個價，代表你有把握處理複雜的問題。</p></div><div class="card3"><h5>責任承擔</h5><p>價格包含更細緻的圖說、更密集的工地巡查。</p></div></div><div class="callout ink"><span class="co-l">價格—品質推論</span><span class="co-t">品質難在購買前驗證時，業主會下意識把「價格」當成專業度的代標。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">習慣用「打折」爭取案件，等於告訴市場「我的服務可以被取代」——這對 14 人事務所非常危險。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>28 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・定價策略與品牌訊號</div>
+        <h2 class="title">低價競標的三大長期代價</h2>
+        <div class="body"><div class="grid3"><div class="card3"><span class="cn">01</span><h5>品牌形象稀釋</h5><p>一旦被貼上「很便宜」標籤，想翻轉的難度不亞於重新創業。</p></div><div class="card3"><span class="cn">02</span><h5>員工產能陷阱</h5><p>單案低利 → 接更多案維持現金 → 過載 → 品質下降 → 惡性循環。</p></div><div class="card3"><span class="cn">03</span><h5>缺乏研發資金</h5><p>沒有利潤就沒錢買更好的軟體、培訓、做設計研究 → 失去不可取代性。</p></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">選擇低價接案，不是「少賺一點」，而是在挖一個讓事務所陷下去的深坑。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>29 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・定價策略與品牌訊號</div>
+        <h2 class="title">Q-LAB 量子跳躍：90 → 50 → 90</h2>
+        <div class="body"><div class="qjump">
+  <div class="qcol"><div class="qbars"><div class="qpub" style="height:90%">公 90%</div><div class="qpri" style="height:10%">私10</div></div><div class="qcap">第一個三年<br>生存與累積</div></div>
+  <div class="qarrow">→</div>
+  <div class="qcol"><div class="qbars"><div class="qpub" style="height:50%">公 50%</div><div class="qpri" style="height:50%">私 50%</div></div><div class="qcap">第二・三個三年<br>品牌紅利</div></div>
+  <div class="qarrow">→</div>
+  <div class="qcol"><div class="qbars"><div class="qpub" style="height:10%">公10</div><div class="qpri" style="height:90%">私 90%</div></div><div class="qcap">近期<br>結構翻轉</div></div>
+</div><p class="note">公部門費率有天花板；私部門是「利潤加速器」，可按<b>價值</b>而非費率定價。</p></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">事務所的成長以「每三年」為一個量子跳躍——用品牌紅利把業務結構推向高利潤的私部門。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>30 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・提案與簡報能力</div>
+        <h2 class="title">提案框架：問題 → 解法 → 信任感</h2>
+        <div class="body"><div class="pst">
+  <div class="pstep"><span class="pn">問題</span><h5>Problem</h5><p>挖掘業主沒察覺的深層需求／潛在危機，讓他覺得「你懂我」。</p></div>
+  <div class="parr">→</div>
+  <div class="pstep"><span class="pn">解法</span><h5>Solution</h5><p>用「因為…所以…」展示設計如何解決問題，而非只展示圖。</p></div>
+  <div class="parr">→</div>
+  <div class="pstep"><span class="pn">信任感</span><h5>Trust</h5><p>實績、獲獎、SOP ＋ 建築文案，證明「說得到、做得到」。</p></div>
+</div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">卓越的提案者，往往在「定義問題」時就贏了——當你替業主說出他心底的擔憂，他立刻覺得你懂他。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>31 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・提案與簡報能力</div>
+        <h2 class="title">政府評選 vs. 私人簡報</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><h4>政府評選 · 公正性與社會效益</h4><ul class="ul"><li>關鍵詞：履約能力、法規界面</li><li>社會效益、都市韌性</li><li>最怕「設計漂亮但蓋不出來、會超支」</li></ul></div><div class="col clay"><h4>私人簡報 · 商業回報與情感連結</h4><ul class="ul"><li>關鍵詞：投資報酬率 ROI</li><li>市場獨特性、美學辨識度</li><li>展示如何增加坪效、創造媒體話題</li></ul></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">身為負責人，你必須具備切換「簡報人格」的能力——政府與私人業主在乎的邏輯完全不同。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>32 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・提案與簡報能力</div>
+        <h2 class="title">加成效應與建築文案</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><h4>新埔國小司令台 · 希望之丘</h4><ul class="ul"><li>8 億校園案，聚焦 <b>450 萬</b> 司令台</li><li>重新定義為「非權威」遊戲地景</li><li>低成本、高傳播力的品牌加成</li></ul></div><div class="col clay"><h4>建築文案 · 讓理念好傳播</h4><ul class="ul"><li>把術語轉成業主聽得懂的金句</li><li>「通風採光的垂直交通核」</li><li>→ <b>「會呼吸的垂直街道」</b></li></ul></div></div><div class="callout clay"><span class="co-l">加成效應</span><span class="co-t">經營者不一定要追逐龐大預算——有時「小的切入點」反而能創造最大的社交聲量。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">建築文案是極低成本的行銷工具：讓私人業主立刻有畫面，也讓政府評委寫評語時有話可說。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>33 / 55</span></div>
+      </div>
+    </section>
+<section class="slide divider">
+      <div class="roman">Ⅳ</div>
+      <div class="bar"></div>
+      <div class="dframe">
+        <div class="dnum">PART Ⅳ</div>
+        <h2 class="dtitle">找上門</h2>
+        <div class="dsub">CLIENT & BUSINESS DEVELOPMENT</div>
+        <p class="ddesc">完工不是結束，是客戶終身價值（LTV）的起點。讓對的業主主動帶著適合你的案子找上門。</p>
+      </div>
+      <div class="dpage">34 / 55</div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・客戶關係長期經營</div>
+        <h2 class="title">完工才是 LTV 起點：四個維繫節點</h2>
+        <div class="body"><div class="timeline">
+  <div class="tline"></div>
+  <div class="tnode"><span class="tdot"></span><div class="tlabel">完工交付</div><p>LTV 開始運算</p></div>
+  <div class="tnode"><span class="tdot"></span><div class="tlabel">週年健檢</div><p>維護建議清單，幫資產保值</p></div>
+  <div class="tnode"><span class="tdot"></span><div class="tlabel">榮譽共享</div><p>得獎／報導／完工攝影分享</p></div>
+  <div class="tnode"><span class="tdot"></span><div class="tlabel">洞察推播</div><p>容積獎勵、危老 → 資產顧問</p></div>
+</div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">專業的建築師不應只在「想接案」時才出現——關係經營是專業服務的延伸。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>35 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・客戶關係長期經營</div>
+        <h2 class="title">差異化客戶分級：A / B / C</h2>
+        <div class="body"><div class="pyramid">
+  <div class="tier t-a"><b>A 級 · 戰略夥伴</b><span>持續需求、高信任、利潤好 → 負責人親自維繫、顧問式面談</span></div>
+  <div class="tier t-b"><b>B 級 · 一般客戶</b><span>品質佳、有轉介潛力 → 系統化自動維繫（電子報、週年通知）</span></div>
+  <div class="tier t-c"><b>C 級 · 單次合作</b><span>規模小、溝通成本高 → 維持基本禮貌聯繫</span></div>
+</div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">把 80% 的精力，花在 20% 能創造最大價值的客戶身上。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>36 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・客戶關係長期經營</div>
+        <h2 class="title">轉介紹機制系統化</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><h4>讓客戶擁有「吹噓的素材」</h4><ul class="ul"><li>定期發送精簡、視覺化的最新動態</li><li>他朋友提到要蓋廠房時</li><li>你的名字立刻躍入腦海</li></ul></div><div class="col clay"><h4>「主動詢問」的藝術</h4><ul class="ul"><li>關係良好時，主動詢問轉介並不可恥</li><li>強調「專業服務的對等」</li><li>讓介紹你 = 幫朋友一個大忙</li></ul></div></div><div class="callout clay"><span class="co-l">話術範例</span><span class="co-t">「這兩年合作非常愉快，若您身邊朋友也有類似的土地開發需求，希望能介紹給我們認識。」</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">轉介紹是成交率最高、開發成本最低的管道——但要讓它穩定發生，你需要設計一套「口碑系統」。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>37 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・多元案源系統建立</div>
+        <h2 class="title">標案：從「追公告」到「追進度」</h2>
+        <div class="body"><div class="steps"><div class="srow"><b>前期追蹤</b>　→　關注年度預算書、議會紀錄、前期規劃結案報告（提前 12–24 個月）</div><div class="srow"><b>備標評估</b>　→　地緣關係、評選委員結構、自身產能匹配</div><div class="srow"><b>投標執行</b>　→　基於產能剩餘與專業匹配的精準進攻</div></div><div class="callout clay"><span class="co-l">關鍵</span><span class="co-t">只盯著電子採購網的公告，你已經輸在起跑線上了——重大工程早在公告前就出現在預算書裡。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">透過 SOP，標案不再是隨機的「中獎」，而是基於產能剩餘與專業匹配的精準進攻。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>38 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・多元案源系統建立</div>
+        <h2 class="title">產業網絡 = 合夥人</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><h4>聯合承攬（Joint Venture）</h4><ul class="ul"><li>面對 20 億以上超大型標案</li><li>你出「設計亮點／特定技術」</li><li>對方出「大型專案管理／財務實績」</li></ul></div><div class="col clay"><h4>同業 = 案源篩選機</h4><ul class="ul"><li>前輩產能飽和或類型不合時</li><li>會轉介給「標籤清晰、信譽良好」的人</li><li>公會、校友會、學界網絡是篩選機</li></ul></div></div><div class="callout ink"><span class="co-l">經營目標</span><span class="co-t">要經營的不是「認識很多人」，而是「讓大家想到某個特定領域時，第一時間想到你」。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">很多人視同業為競爭者，但在專業服務業，同業往往是最高品質的案源轉介者。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>39 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・多元案源系統建立</div>
+        <h2 class="title">品牌複利與每 3 年量子跳躍</h2>
+        <div class="body"><div class="ladder">
+  <div class="rung r1"><b>第 1–3 年</b><span>競圖／得獎建立能見度，站穩公部門生存水位</span></div>
+  <div class="rung r2"><b>第 4–6 年</b><span>出版與展覽，吸引美學認同的私部門業主，轉向高利潤</span></div>
+  <div class="rung r3"><b>第 7 年＋</b><span>品牌磁吸效應，由「找案子」轉向「選案子」</span></div>
+</div><div class="callout clay"><span class="co-l">金句</span><span class="co-t">品牌建立不是為了虛名，而是獲客成本的「減法」——客戶是來「求教」而非「交易」。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">出版、得獎、展覽看似「不務正業」，其實是在預先過濾業主、降低溝通成本（CAC）。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>40 / 55</span></div>
+      </div>
+    </section>
+<section class="slide divider">
+      <div class="roman">Ⅴ</div>
+      <div class="bar"></div>
+      <div class="dframe">
+        <div class="dnum">PART Ⅴ</div>
+        <h2 class="dtitle">系統整合</h2>
+        <div class="dsub">INTEGRATION & PRACTICE</div>
+        <p class="ddesc">四大模組不是獨立的檔案夾，而是一套導航系統。把財務、人事、專案、策略整合成一張 A3 決策地圖。</p>
+      </div>
+      <div class="dpage">41 / 55</div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・四大模組整合</div>
+        <h2 class="title">遲滯效應：為何需要系統思維</h2>
+        <div class="body"><p class="lead">14 人組織已產生「<b>遲滯效應</b>」：一個錯誤的報價決策，其負面影響可能要到 <b>6 個月後</b>才會在現金流上爆發。</p><div class="cols"><div class="col neutral"><h4>局部優化（救火式）</h4><ul class="ul"><li>財務吃緊就催帳</li><li>人手不足就招募</li><li>案源少就拼命投標 → 原地打轉</li></ul></div><div class="col clay"><h4>系統整合（預測式）</h4><ul class="ul"><li>理解四系統間的傳動鏈條</li><li>移動一個棋子，預見其他維度的漣漪</li><li>確保每分工時轉化為實質獲利</li></ul></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">「系統思維」是經營者與執行者最大的分水嶺——整合四大模組，是為了建立「預測能力」。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>42 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・四大模組整合</div>
+        <h2 class="title">A3 經營決策地圖：四象限</h2>
+        <div class="body"><div class="quad">
+  <div class="q"><span class="qk">方向盤</span><h5>策略維度</h5><p>強化不可取代性？指標：議價成功率、品牌溢價倍數</p></div>
+  <div class="q"><span class="qk">油表</span><h5>財務維度</h5><p>消耗還是貢獻現金流？指標：邊際貢獻、安全邊際、單案毛利率</p></div>
+  <div class="q"><span class="qk">引擎</span><h5>人事維度</h5><p>人均產值是否達標？指標：工時利用率、留任率、用人成本比重</p></div>
+  <div class="q"><span class="qk">齒輪</span><h5>專案維度</h5><p>交付範疇明確？指標：圖說準確率、工時消耗率、收款達成率</p></div>
+</div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">面對重大決策時對照這張圖——它把事務所簡化為四個維度的動態平衡。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>43 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第一節・四大模組整合</div>
+        <h2 class="title">連動邏輯與漣漪效應</h2>
+        <div class="body"><div class="links">
+        <div class="lrow"><span class="lk">策略 ↔ 人事</span><div>定價權決定人才天花板——高定價才養得起 1.8 倍成本的資深設計師。</div></div>
+        <div class="lrow"><span class="lk">專案 ↔ 財務</span><div>拒絕案子是為了保護現金流——接爛案＝機會成本＋現金缺口。</div></div>
+        <div class="lrow"><span class="lk">人事 ↔ 專案</span><div>獎金與單案 P&L 掛鉤，SOP 才從「監視」變成員工爭取績效的工具。</div></div>
+        </div><div class="callout clay"><span class="co-l">漣漪演練</span><span class="co-t">「業主不加費卻要加倍範疇」→ 同時損壞策略、財務、人事、專案四個系統。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">好的系統會讓自私的行為導向公正的結果——一個讓步會同時損壞四個系統，所以要拿數據談判。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>44 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">實戰模擬 · 1,500 萬標案</div>
+        <h2 class="title">Step 1　篩選：這塊肉有沒有毒？</h2>
+        <div class="body"><p class="lead">1,500 萬營收很誘人，但最稀缺的是「關鍵人才的產能」——可能要投入 1 位專案建築師 ＋ 2–3 位資深設計師，佔核心戰力 <b>30%</b>。</p><div class="grid3"><div class="card3"><span class="cn">1</span><h5>執行風險與業主紀錄</h5><p>查該單位變更頻率、是否有非技術性延宕、付款紀錄。</p></div><div class="card3"><span class="cn">2</span><h5>技術契合度與策略價值</h5><p>是否成為未來 3 年進入特定領域的門票？</p></div><div class="card3"><span class="cn">3</span><h5>機會成本</h5><p>核心 4 人卡死 24 個月，夢寐以求的高毛利私案來了還接得下嗎？</p></div></div><p class="note"><b>紅線</b>：長期拖欠或極不平等罰則（逾期一天罰千分之一）→ 一票否決。</p></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">1,500 萬的營收很誘人，但你最稀缺的資源不是錢，而是關鍵人才的產能。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>45 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">實戰模擬 · 1,500 萬標案</div>
+        <h2 class="title">Step 2　報價試算：數字背後的真實獲利</h2>
+        <div class="body"><div class="steps"><div class="srow">標單結構：設計費 <b>1,100 萬</b> ＋ 監造費 <b>400 萬</b></div><div class="srow">1,500 萬　−　目標利潤 20%（300 萬）　−　變動成本 20%（300 萬）</div><div class="srow">=　<b>900 萬</b> 可用人力成本</div><div class="srow">900 萬　÷　800 元/時　=　<span class="hl">11,250 小時</span>（燃料總量 / Walk-away price）</div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">報多少錢不是看底價，而是看你的「成本底線」——超過 11,250 小時，你就在賠錢。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>46 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">實戰模擬 · 1,500 萬標案</div>
+        <h2 class="title">Step 3　人力配置與工時規劃</h2>
+        <div class="body"><div class="propbar"><div class="seg c-clay" style="width:20%"><span>概念基本 20%</span></div><div class="seg c-ink" style="width:25%"><span>細部執照 25%</span></div><div class="seg c-ink2" style="width:35%"><span>圖說招標 35%</span></div><div class="seg c-ink3" style="width:20%"><span>監造驗收 20%</span></div></div><div class="stats" style="grid-template-columns:repeat(3,1fr)"><div class="stat"><div class="num">2,250</div><div class="lbl">概念與基本設計（小時）</div></div><div class="stat"><div class="num">3,938</div><div class="lbl">圖說製作與招標（小時）</div></div><div class="stat"><div class="num">≈ 2.8 人</div><div class="lbl">全職卡 2 年的人力</div></div></div><p class="note">月平均 11,250 ÷ 24 ≈ <b>468 小時</b>。警訊：若已滿載，擴編 1 人＝每月 +1.7 倍薪資固定成本。</p></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">別把 11,250 小時直接丟給設計師，要像分配彈藥一樣進行階段性配置。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>47 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">實戰模擬 · 1,500 萬標案</div>
+        <h2 class="title">Step 4　合約設計與收款防火牆</h2>
+        <div class="body"><div class="cols"><div class="col neutral"><h4>收款節點 · 進度導向</h4><ul class="ul"><li>傳統：「領得建造執照後付 X%」</li><li>風險：鄰居陳情、都審改選卡 8 個月</li><li>改為「掛號並初審通過後」收款</li></ul></div><div class="col clay"><h4>範疇與監造保險</h4><ul class="ul"><li>量化重大變更（樓地板 &gt;10%）</li><li>監造費：非可歸責事由延長應另行核給</li><li>補充協議是最強的談判籌碼</li></ul></div></div><div class="callout ink"><span class="co-l">翻案損失</span><span class="co-t">基本設計超時 1,500 小時 = 利潤直接蒸發 <b>120 萬</b>（1,500 × 800）→ 立即出示合約簽補充協議。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">在 1,500 萬的規模下，行政延宕是最大的獲利殺手——把收款主動權拿回自己手中。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>48 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・Notion 儀表板整合</div>
+        <h2 class="title">把商業邏輯植入資料庫</h2>
+        <div class="body"><p class="lead">核心 = 建立 <b>Relation</b>：案件 ↔ 工時 ↔ 員工成本 自動關聯。填寫工時 → 自動算人力成本（Rollup）→ 自動更新單案即時毛利。</p><div class="grid3"><div class="card3"><h5>現金儲備月數</h5><p>帳戶餘額 ÷ 每月固定成本；&gt;6 綠、&lt;3 紅。</p></div><div class="card3"><h5>人均產值趨勢</h5><p>已收設計費 ÷ 團隊人數；逐月下降代表組織臃腫。</p></div><div class="card3"><h5>應收帳款警示</h5><p>今天 &gt; 預計收款日且未收 → 自動置頂提醒催款。</p></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">數據的價值在於「能導向行動」——別套漂亮模板，先確定資料庫之間的關聯。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>49 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第二節・Notion 儀表板整合</div>
+        <h2 class="title">觸發 → 查詢 → 決策 SOP</h2>
+        <div class="body"><table><thead><tr><th>觸發條件</th><th>資料查詢</th><th>經營者決策動作</th></tr></thead><tbody><tr><td>單案人力成本 &gt; 預算 80%</td><td>查工時細目：修改太多？還是效率低？</td><td>與業主協商追加，或調整內部執行</td></tr><tr><td>現金儲備 &lt; 3 個月</td><td>查應收帳款與未來三個月入帳</td><td>暫緩招聘、親自追蹤大額欠款</td></tr><tr><td>人均產值連兩季下降</td><td>對比行政工時與設計工時比例</td><td>考慮將非核心行政外包</td></tr><tr><td>特定階段燃盡過快</td><td>檢查合約範疇條款是否有模糊地帶</td><td>向團隊發範疇預警，嚴格記錄</td></tr></tbody></table></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">儀表板不只是用來看的——你只需要盯著那些「變紅」的指標，系統會主動提醒你介入。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>50 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・季度經營檢視</div>
+        <h2 class="title">QBR：對未來三個月投票</h2>
+        <div class="body"><div class="callout ink"><span class="co-l">定位差異</span><span class="co-t">儀表板＝生存（合規監控）；季度檢視＝發展（航向修正）。每三個月一次的「暫停鍵」。</span></div><div class="grid4"><div class="card3"><h5>財務健康</h5><p>BEP 變動、現金安全邊際、DSO 應收天數。</p></div><div class="card3"><h5>人力盤點</h5><p>人均產值、加班與產出關聯、培訓回報。</p></div><div class="card3"><h5>案件組合</h5><p>找出高毛利「良藥」與超時「毒藥」、案源集中度。</p></div><div class="card3"><h5>策略校準</h5><p>定價權驗證、轉介紹率與品牌訊號。</p></div></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">季度檢視的本質不是「看過去發生了什麼」，而是「為未來三個月進行投票」。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>51 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">第三節・季度經營檢視</div>
+        <h2 class="title">停損 → 優化 → 加速</h2>
+        <div class="body"><div class="grid3"><div class="card3"><h5>停損 Stop</h5><p>放棄持續虧損、無策略價值的案件／流程／不適任者。</p></div><div class="card3"><h5>優化 Optimize</h5><p>高產能但高壓環節建 SOP（如圖庫標準化）。</p></div><div class="card3"><h5>加速 Accelerate</h5><p>高毛利且符合定位的成功模式，大膽加碼資源。</p></div></div><div class="callout clay"><span class="co-l">離場紅線（量化）</span><span class="co-t">人均產值 &lt; 薪資成本 2.5 倍，或行政／協調工時 &gt; 20% → 列入停損名單。</span></div></div>
+        <div class="rule"><span class="rl">決策規則</span><p class="rt">停損、優化、加速是經營者的三把剪刀，用來修剪出更健康的事務所結構。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>52 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">全課總結</div>
+        <h2 class="title">四把鑰匙</h2>
+        <div class="body"><div class="chain">
+  <div class="ck"><b>篩選</b><span>不浪費能量在不對的案子</span></div>
+  <div class="ca">→</div>
+  <div class="ck"><b>預算與條款</b><span>保住利潤、防禦風險</span></div>
+  <div class="ca">→</div>
+  <div class="ck"><b>覆盤</b><span>經驗變成精確數據</span></div>
+  <div class="ca">→</div>
+  <div class="ck"><b>整合</b><span>優雅拒絕、精確抓住</span></div>
+</div></div>
+        <div class="rule"><span class="rl">一句話</span><p class="rt">經營事務所不是靠運氣，而是靠這套不斷自我修正的系統。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>53 / 55</span></div>
+      </div>
+    </section>
+<section class="slide">
+      <div class="frame">
+        <div class="kicker">全課總結</div>
+        <h2 class="title">四模組精髓 ＋ 經營者覺醒</h2>
+        <div class="body"><table><thead><tr><th>模組</th><th>角色</th><th>一句話精髓</th></tr></thead><tbody><tr><td>財務</td><td><span class="badge red">底線</span></td><td>用「完全用人成本」算損益，否則看到的獲利都是假象。</td></tr><tr><td>人事</td><td><span class="badge gold">燃料</span></td><td>人均產值才是 14 人事務所的效率真相。</td></tr><tr><td>專案</td><td><span class="badge green">過程</span></td><td>把時間當燃料，靠燃盡圖與合約守住利潤。</td></tr><tr><td>策略</td><td><span class="badge clay-b">方向</span></td><td>不可取代性決定定價權，定價權決定利潤空間。</td></tr></tbody></table></div>
+        <div class="rule"><span class="rl">一句話</span><p class="rt">畫一棟漂亮的建築是專業；設計一套能自動運轉、健康獲利的事務所系統，是智慧。</p></div>
+        <div class="footer"><span>事務所商業決策能力（下）</span><span>54 / 55</span></div>
+      </div>
+    </section>
+<section class="slide closing">
+      <div class="bar"></div>
+      <div class="clframe">
+        <div class="ckicker">CLOSING</div>
+        <p class="bigquote">畫一棟漂亮的建築是專業；<br>設計一套能自動運轉、健康獲利的<br><em>事務所系統，是智慧。</em></p>
+        <p class="clline">事務所本身，就是你這輩子最重要的設計作品。</p>
+        <div class="clact"><span class="clact-l">複習起手式</span>先從「現金流預警」與「單案工時追蹤」兩個最有感的模組開始。</div>
+      </div>
+      <div class="cpage">事務所商業決策能力（下） · 55 / 55</div>
+    </section>
+</div>
+<div id="hint">← → 翻頁　·　可列印另存 PDF</div>
+<div id="nav"><button id="pv">‹</button><span id="counter"></span><button id="nx">›</button></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+const counter=document.getElementById('counter');
+const prog=document.getElementById('progress');
+function show(n){
+  cur=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,i)=>s.classList.toggle('active',i===cur));
+  counter.textContent=String(cur+1).padStart(2,'0')+' / '+slides.length;
+  prog.style.width=((cur+1)/slides.length*100)+'%';
+  location.hash=cur+1;
+}
+function next(){show(cur+1)} function prev(){show(cur-1)}
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();next();}
+  else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();prev();}
+  else if(e.key==='Home'){show(0)} else if(e.key==='End'){show(slides.length-1)}
+});
+document.getElementById('nx').onclick=next;
+document.getElementById('pv').onclick=prev;
+const start=parseInt(location.hash.replace('#',''))||1;
+show(start-1);
+</script>
+</body>
+</html>
