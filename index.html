@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>事務所商業決策能力 ｜ 課程複習目錄</title>
+<style>
+  :root{
+    --ink:#2c3e50; --ink-deep:#243442; --ink-soft:#34495e;
+    --accent:#e07b4f; --accent-soft:#e89274;
+    --paper:#f7f6f3; --line:#e3e0da; --muted:#7a7368;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Helvetica Neue",Arial,"PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--paper); color:var(--ink); line-height:1.7;
+  }
+  .serif{font-family:"Songti TC",Georgia,"Times New Roman",serif;}
+
+  header{
+    background:var(--ink-deep); color:#fff; padding:14px 32px;
+    display:flex; align-items:center; gap:12px;
+  }
+  header .brand{font-family:Georgia,serif; font-size:18px; letter-spacing:.5px;}
+  header .brand b{color:var(--accent);}
+
+  .hero{
+    background:var(--ink); color:#fff;
+    border-left:8px solid var(--accent);
+    padding:64px 32px 72px;
+  }
+  .hero .eyebrow{
+    color:var(--accent); letter-spacing:3px; font-size:13px;
+    font-weight:700; margin-bottom:18px;
+  }
+  .hero h1{font-size:46px; line-height:1.25; margin-bottom:16px;}
+  .hero p.sub{font-size:18px; color:#cfd6dc; max-width:760px;}
+  .hero .meta{
+    margin-top:28px; padding-top:18px; border-top:1px solid #4a5b6b;
+    font-size:14px; color:#aeb9c4;
+  }
+
+  .wrap{max-width:980px; margin:0 auto; padding:56px 32px 80px;}
+  .section-label{
+    color:var(--accent); letter-spacing:3px; font-size:13px;
+    font-weight:700; margin-bottom:10px;
+  }
+  .wrap > h2{font-size:30px; margin-bottom:14px;}
+  .wrap > p.lead{font-size:17px; color:var(--ink-soft); margin-bottom:40px;}
+
+  .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:24px;}
+  .card{
+    background:#fff; border:1px solid var(--line);
+    border-top:4px solid var(--accent);
+    border-radius:8px; padding:32px 28px;
+    text-decoration:none; color:inherit;
+    transition:transform .15s ease, box-shadow .15s ease;
+    display:flex; flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:0 12px 26px rgba(44,62,80,.13);}
+  .card .tag{
+    font-size:13px; font-weight:700; color:var(--accent);
+    letter-spacing:1px; margin-bottom:12px;
+  }
+  .card h3{font-size:23px; margin-bottom:12px; line-height:1.4;}
+  .card p{font-size:15px; color:var(--muted); flex:1;}
+  .card .topics{
+    margin-top:14px; font-size:13px; color:var(--ink-soft);
+    letter-spacing:.5px;
+  }
+  .card .go{
+    margin-top:20px; font-size:14px; font-weight:700; color:var(--ink);
+  }
+
+  footer{
+    text-align:center; padding:32px; color:var(--muted);
+    font-size:13px; border-top:1px solid var(--line);
+  }
+  @media(max-width:760px){
+    .cards{grid-template-columns:1fr;}
+    .hero h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+  <header>
+    <span class="brand">初樸 · <b>事務所經營</b> 複習</span>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">COURSE REVIEW HUB</div>
+    <h1 class="serif">事務所商業決策能力</h1>
+    <p class="sub">把每一條決策規則，套進真實數字裡 ── 從「憑感覺」到「有根據」的互動複習網頁。</p>
+    <div class="meta">課程來源：初樸建築師事務所「事務所經營管理」課程筆記 · 分為上、下兩集</div>
+  </section>
+
+  <main class="wrap">
+    <div class="section-label">CHAPTERS</div>
+    <h2 class="serif">兩集複習目錄</h2>
+    <p class="lead">課程分為上、下兩集，點選下方卡片即可進入各集互動複習頁面。</p>
+
+    <div class="cards">
+      <a class="card" href="part1.html">
+        <span class="tag">上集 · PART I</span>
+        <h3 class="serif">從「憑感覺」到「有根據」</h3>
+        <p>把每一個過去「憑感覺」的經營決策，換成「有數據、有系統根據」的決策。</p>
+        <div class="topics">思維轉換 · 財務管理 · 人事管理 ｜ 內含四個即時計算工具</div>
+        <span class="go">進入上集 →</span>
+      </a>
+
+      <a class="card" href="arch_biz_decisions_part2_web.html">
+        <span class="tag">下集 · PART II</span>
+        <h3 class="serif">選對案子、守住利潤、把四件事變成一套系統</h3>
+        <p>把每一條決策規則，套進你自己的真實數字裡，建立可複製的經營系統。</p>
+        <div class="topics">專案經營 · 策略拓展 · 系統整合 ｜ 內含七個即時計算機</div>
+        <span class="go">進入下集 →</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>初樸建築師事務所 · 事務所商業決策能力複習 ｜ © 2026</footer>
+</body>
+</html>
